@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Game Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A96E;
+  --gold-light: #E8D5A8;
+  --gold-dark: #8B7340;
+  --navy: #0A0E1A;
+  --navy-light: #141B2D;
+  --navy-mid: #1C2540;
+  --cream: #F5F0E8;
+  --cream-dim: #E8E0D0;
+  --white: #FAFAF8;
+  --rose: #C4727F;
+  --rose-soft: #D4949E;
+  --text-primary: #F5F0E8;
+  --text-secondary: rgba(245, 240, 232, 0.65);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px 40px;
+  overflow: hidden;
+}
+
+.slide-inner {
+  max-width: 950px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.nav-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.nav-dot:hover::after { opacity: 1; }
+.nav-dot.active { background: var(--gold); transform: scale(1.3); }
+
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* ====== TITLE ====== */
+#slide-title {
+  background: radial-gradient(ellipse at 30% 40%, rgba(201,169,110,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 70%, rgba(196,114,127,0.04) 0%, transparent 50%),
+              var(--navy);
+}
+
+.title-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 50px;
+  align-items: center;
+}
+
+.title-photos {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+}
+
+.title-photo {
+  border-radius: 16px;
+  object-fit: cover;
+  border: 2px solid rgba(201,169,110,0.15);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.title-photo.main { width: 175px; height: 230px; }
+.title-photo.secondary { width: 135px; height: 185px; opacity: 0.9; transform: translateY(-20px); }
+
+.title-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,169,110,0.3);
+  padding: 8px 20px;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.3s forwards;
+}
+
+.title-main {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(50px, 7vw, 96px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  margin-bottom: 26px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.6s forwards;
+}
+
+.title-main .gold { color: var(--gold); }
+
+.title-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 2.2vw, 23px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.9s forwards;
+}
+
+.title-meta {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  opacity: 0;
+  animation: fadeUp 1s ease 1.2s forwards;
+}
+
+.title-meta .divider { width: 60px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
+
+.title-photos-container { opacity: 0; animation: fadeUp 1.2s ease 1s forwards; }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.8s forwards;
+}
+
+.scroll-hint span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-dark); }
+
+.scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 1.5px solid var(--gold-dark);
+  border-bottom: 1.5px solid var(--gold-dark);
+  transform: rotate(45deg);
+  animation: bounceArrow 2s ease infinite;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(6px); }
+}
+
+/* ====== ABOUT ====== */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-bottom: 40px; }
+
+.about-card {
+  background: linear-gradient(135deg, rgba(201,169,110,0.06), rgba(201,169,110,0.02));
+  border: 1px solid rgba(201,169,110,0.1);
+  border-radius: 16px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); }
+
+.about-photo-wrapper { display: flex; justify-content: center; margin-bottom: 18px; }
+
+.about-photo {
+  width: 115px; height: 115px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(201,169,110,0.2);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.about-photo.silly { border-color: rgba(196,114,127,0.3); transform: rotate(3deg); }
+
+.about-card h3 { font-family: 'Playfair Display', serif; font-size: 23px; font-weight: 700; margin-bottom: 14px; color: var(--cream); text-align: center; }
+
+.about-card .traits { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; justify-content: center; }
+
+.trait {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
+  padding: 5px 12px; border-radius: 20px;
+  background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.15);
+  color: var(--gold-light);
+}
+
+.about-card .detail-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; text-align: center; }
+
+.about-card .highlight { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: var(--rose-soft); margin-top: 10px; text-align: center; line-height: 1.5; }
+
+.feba-extra-photos { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+
+.feba-mini {
+  width: 58px; height: 58px; border-radius: 10px; object-fit: cover;
+  border: 2px solid rgba(196,114,127,0.2); transition: transform 0.3s;
+}
+
+.feba-mini:nth-child(1) { transform: rotate(-5deg); }
+.feba-mini:nth-child(2) { transform: rotate(4deg); }
+.feba-mini:hover { transform: rotate(0deg) scale(1.15); }
+
+.mission-box { text-align: center; padding: 30px; border: 1px solid rgba(201,169,110,0.15); border-radius: 16px; background: rgba(201,169,110,0.03); }
+.mission-box h4 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--gold); margin-bottom: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.mission-box p { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--cream-dim); line-height: 1.6; }
+
+/* ====== COMMITMENT ====== */
+#slide-commitment { text-align: center; }
+.commitment-date { font-family: 'Playfair Display', serif; font-size: clamp(60px, 10vw, 120px); font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 10px; text-shadow: 0 0 80px rgba(201,169,110,0.2); }
+.commitment-month { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 4vw, 40px); font-weight: 300; color: var(--cream-dim); margin-bottom: 50px; }
+.commitment-action { font-size: 14px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+.commitment-rule { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--text-secondary); margin-bottom: 50px; line-height: 1.6; }
+.signature-block { display: flex; justify-content: center; gap: 60px; margin-bottom: 50px; }
+.signature-line { width: 180px; text-align: center; }
+.signature-line .line { width: 100%; height: 1px; background: rgba(201,169,110,0.3); margin-bottom: 10px; }
+.signature-line span { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); }
+.commitment-note { display: inline-block; padding: 14px 28px; border: 1px solid rgba(201,169,110,0.2); border-radius: 8px; background: rgba(201,169,110,0.04); }
+.commitment-note p:first-child { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+.commitment-note p:last-child { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--gold); font-weight: 600; }
+
+/* ====== TIMELINE ====== */
+.timeline { position: relative; padding-left: 40px; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--gold), var(--gold-dark), transparent); }
+.timeline-item { position: relative; margin-bottom: 30px; padding-left: 20px; }
+.timeline-item::before { content: ''; position: absolute; left: -36px; top: 8px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--gold); background: var(--navy); transition: all 0.3s; }
+.timeline-item:hover::before { background: var(--gold); box-shadow: 0 0 20px rgba(201,169,110,0.4); }
+.timeline-item.special::before { background: var(--rose); border-color: var(--rose); width: 14px; height: 14px; left: -37px; top: 7px; }
+.tl-date { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.tl-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--cream); margin-bottom: 4px; }
+.tl-details { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 12px; margin-top: 6px; margin-right: 4px; }
+.tag-ambitious { background: rgba(196,114,127,0.15); color: var(--rose-soft); border: 1px solid rgba(196,114,127,0.3); }
+.tag-milestone { background: rgba(201,169,110,0.12); color: var(--gold-light); border: 1px solid rgba(201,169,110,0.25); }
+.tag-jnj { background: rgba(220,53,69,0.12); color: #f0a0a8; border: 1px solid rgba(220,53,69,0.25); }
+
+/* ====== EXPANSION ====== */
+#slide-expansion { text-align: center; }
+.expansion-heading { font-family: 'Playfair Display', serif; font-size: clamp(30px, 5vw, 50px); font-weight: 900; margin-bottom: 46px; line-height: 1.2; }
+.expansion-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+.exp-card { padding: 30px; border-radius: 16px; border: 1px solid rgba(201,169,110,0.12); background: rgba(201,169,110,0.03); text-align: left; }
+.exp-card .exp-date { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--gold); margin-bottom: 4px; }
+.exp-card .exp-month { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 14px; }
+.exp-card .exp-detail { font-size: 14px; color: var(--cream-dim); line-height: 1.6; }
+.exp-card .exp-detail strong { color: var(--gold-light); }
+.happily-ever-after { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; color: var(--rose-soft); margin-top: 16px; }
+
+/* ====== LOGISTICS ====== */
+.logistics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.log-card { padding: 26px; border-radius: 16px; border: 1px solid rgba(201,169,110,0.1); background: linear-gradient(160deg, rgba(201,169,110,0.04), transparent); }
+.log-card .log-icon { font-size: 28px; margin-bottom: 12px; }
+.log-card .log-dates { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.log-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 10px; color: var(--cream); }
+.log-card .sub-items { list-style: none; margin-top: 8px; }
+.log-card .sub-items li { font-size: 13px; color: var(--text-secondary); padding: 3px 0 3px 16px; position: relative; }
+.log-card .sub-items li::before { content: '→'; position: absolute; left: 0; color: var(--gold-dark); }
+
+/* ====== PROPOSAL ====== */
+#slide-proposal { text-align: center; }
+.ring-glow { width: 140px; height: 140px; border-radius: 50%; border: 2px solid rgba(201,169,110,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; position: relative; animation: ringPulse 3s ease infinite; }
+.ring-glow::before { content: ''; position: absolute; inset: -20px; border-radius: 50%; border: 1px solid rgba(201,169,110,0.08); }
+.ring-glow::after { content: ''; position: absolute; inset: -40px; border-radius: 50%; border: 1px solid rgba(201,169,110,0.04); }
+@keyframes ringPulse { 0%, 100% { box-shadow: 0 0 30px rgba(201,169,110,0.1); } 50% { box-shadow: 0 0 60px rgba(201,169,110,0.2); } }
+.ring-glow span { font-size: 48px; }
+.proposal-heading { font-family: 'Playfair Display', serif; font-size: clamp(26px, 4vw, 40px); font-weight: 900; margin-bottom: 12px; }
+.proposal-window { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+.proposal-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 660px; margin: 0 auto; }
+.p-step { text-align: center; }
+.p-step .step-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: var(--gold); margin-bottom: 6px; }
+.p-step .step-text { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+/* ====== SUMMER EVENTS ====== */
+.dual-events { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.event-card { padding: 32px; border-radius: 16px; border: 1px solid rgba(201,169,110,0.12); background: rgba(201,169,110,0.03); text-align: center; }
+.event-card .ev-icon { font-size: 36px; margin-bottom: 12px; }
+.event-card .ev-dates { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.event-card .ev-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; margin-bottom: 6px; color: var(--cream); }
+.event-card .ev-sub { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: var(--text-secondary); margin-bottom: 14px; }
+.event-card .ev-items { text-align: left; }
+.event-card .ev-items .ev-item { font-size: 13px; color: var(--cream-dim); padding: 3px 0 3px 18px; position: relative; }
+.event-card .ev-items .ev-item::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 9px; top: 5px; }
+.event-card.pcnak { border-color: rgba(100,149,237,0.15); }
+.event-card.pcnak .ev-dates { color: #a0c0f0; }
+.jnj-callout { margin-bottom: 28px; text-align: center; padding: 20px; border-radius: 12px; border: 1px solid rgba(196,114,127,0.15); background: rgba(196,114,127,0.04); }
+.jnj-callout p { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--rose-soft); line-height: 1.5; }
+.jnj-callout .jnj-note { font-family: 'DM Sans', sans-serif; font-size: 12px; font-style: normal; color: var(--text-secondary); margin-top: 6px; display: block; }
+
+/* ====== ENGAGEMENT ====== */
+#slide-engagement { text-align: center; }
+.engagement-period { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.engagement-heading { font-family: 'Playfair Display', serif; font-size: clamp(30px, 5vw, 50px); font-weight: 900; margin-bottom: 14px; }
+.engagement-sub { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--text-secondary); margin-bottom: 32px; }
+.engagement-items { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.eng-item { padding: 20px 26px; border: 1px solid rgba(201,169,110,0.12); border-radius: 12px; background: rgba(201,169,110,0.03); }
+.eng-item .eng-icon { font-size: 24px; margin-bottom: 8px; }
+.eng-item p { font-size: 14px; color: var(--cream-dim); }
+
+/* ====== NORTHEASTERN ====== */
+#slide-northeastern { text-align: center; }
+.neu-period { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.neu-heading { font-family: 'Playfair Display', serif; font-size: clamp(26px, 4vw, 44px); font-weight: 900; margin-bottom: 14px; }
+.neu-sub { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--text-secondary); margin-bottom: 34px; }
+.neu-card { max-width: 580px; margin: 0 auto; padding: 34px; border-radius: 16px; border: 1px solid rgba(200,16,46,0.12); background: rgba(200,16,46,0.03); }
+.neu-card .neu-school { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #e88090; margin-bottom: 12px; }
+.neu-card .neu-degree { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
+.neu-card .neu-detail { font-size: 15px; color: var(--cream-dim); line-height: 1.6; margin-bottom: 14px; }
+.neu-card .neu-note { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--rose-soft); }
+
+/* ====== WEDDING ====== */
+.wedding-options { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 34px; }
+.wedding-option { padding: 32px; border-radius: 16px; border: 1px solid rgba(201,169,110,0.12); background: rgba(201,169,110,0.03); text-align: center; transition: all 0.4s; cursor: default; }
+.wedding-option:hover { border-color: rgba(201,169,110,0.3); background: rgba(201,169,110,0.06); transform: translateY(-4px); }
+.wedding-option .opt-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.wedding-option .opt-date { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; color: var(--cream); margin-bottom: 4px; }
+.wedding-option .opt-numeric { font-size: 14px; color: var(--gold-light); margin-bottom: 12px; font-weight: 500; }
+.wedding-option .opt-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.spiritual-note { text-align: center; padding: 26px; border-radius: 16px; border: 1px solid rgba(196,114,127,0.15); background: rgba(196,114,127,0.04); }
+.spiritual-note .sn-label { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--rose-soft); margin-bottom: 12px; }
+.spiritual-note blockquote { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-style: italic; color: var(--cream); margin-bottom: 8px; line-height: 1.5; }
+.spiritual-note p { font-size: 14px; color: var(--text-secondary); }
+
+/* ====== FINAL ====== */
+#slide-final { text-align: center; }
+.final-photos { display: flex; justify-content: center; gap: 16px; margin-bottom: 36px; }
+.final-photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(201,169,110,0.2); }
+.final-photo:first-child { transform: translateY(8px); }
+.final-photo:last-child { transform: translateY(8px); }
+.final-heading { font-family: 'Playfair Display', serif; font-size: clamp(42px, 7vw, 80px); font-weight: 900; margin-bottom: 40px; line-height: 1; }
+.final-words { display: flex; justify-content: center; gap: 40px; margin-bottom: 46px; }
+.final-word { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--gold-light); position: relative; }
+.final-word:not(:last-child)::after { content: '·'; position: absolute; right: -24px; color: var(--gold-dark); }
+.final-question { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 400; color: var(--text-secondary); font-style: italic; }
+
+/* ====== ANIMATIONS ====== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .slide { padding: 40px 20px; }
+  .title-layout { grid-template-columns: 1fr; gap: 28px; }
+  .title-photos { justify-content: center; }
+  .title-photo.main { width: 130px; height: 170px; }
+  .title-photo.secondary { width: 100px; height: 140px; }
+  .about-grid, .expansion-cards, .logistics-grid, .wedding-options, .dual-events { grid-template-columns: 1fr; }
+  .proposal-steps { grid-template-columns: repeat(2, 1fr); }
+  .signature-block { gap: 30px; }
+  .signature-line { width: 140px; }
+  .engagement-items { flex-direction: column; align-items: center; }
+  .final-words { flex-direction: column; gap: 14px; align-items: center; }
+  .final-word::after { display: none; }
+  .nav-dots { display: none; }
+  .title-meta { flex-direction: column; gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav-dots" id="navDots">
+  <div class="nav-dot active" data-slide="0" data-label="Title"></div>
+  <div class="nav-dot" data-slide="1" data-label="About"></div>
+  <div class="nav-dot" data-slide="2" data-label="Commitment"></div>
+  <div class="nav-dot" data-slide="3" data-label="Roadmap"></div>
+  <div class="nav-dot" data-slide="4" data-label="Expansion"></div>
+  <div class="nav-dot" data-slide="5" data-label="Logistics"></div>
+  <div class="nav-dot" data-slide="6" data-label="Proposal"></div>
+  <div class="nav-dot" data-slide="7" data-label="Summer"></div>
+  <div class="nav-dot" data-slide="8" data-label="Engagement"></div>
+  <div class="nav-dot" data-slide="9" data-label="Northeastern"></div>
+  <div class="nav-dot" data-slide="10" data-label="Wedding"></div>
+  <div class="nav-dot" data-slide="11" data-label="Final"></div>
+</nav>
+
+<!-- TITLE -->
+<section class="slide" id="slide-title">
+  <div class="slide-inner">
+    <div class="title-layout">
+      <div>
+        <div class="title-badge">Strategic Vision · 2026</div>
+        <h1 class="title-main">The <span class="gold">Game</span><br>Plan</h1>
+        <p class="title-subtitle">A Strategic Vision for Something That Could Be Beautiful</p>
+        <div class="title-meta">
+          <span>Stephen Johnson</span>
+          <div class="divider"></div>
+          <span>February 2026</span>
+        </div>
+      </div>
+      <div class="title-photos-container">
+        <div class="title-photos">
+          <img src="stephen2.jpeg" alt="Stephen" class="title-photo main" />
+          <img src="feba1.jpeg" alt="Feba" class="title-photo secondary" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section class="slide" id="slide-about">
+  <div class="slide-inner">
+    <div class="section-label fade-in">About Us</div>
+    <div class="about-grid">
+      <div class="about-card fade-in">
+        <div class="about-photo-wrapper">
+          <img src="stephen3.jpeg" alt="Stephen" class="about-photo" />
+        </div>
+        <h3>Stephen Johnson</h3>
+        <div class="traits">
+          <span class="trait">26 years old</span>
+          <span class="trait">Faith-driven</span>
+          <span class="trait">Intentional</span>
+        </div>
+        <p class="detail-text">Big on commitment, leadership, and building a God-centered home.</p>
+        <p class="highlight">Likes a girl named Feba Fredie ♡</p>
+      </div>
+      <div class="about-card fade-in">
+        <div class="about-photo-wrapper">
+          <img src="feba1.jpeg" alt="Feba" class="about-photo silly" />
+        </div>
+        <h3>Feba Fredie</h3>
+        <div class="traits">
+          <span class="trait">Smart</span>
+          <span class="trait">Faith-centered</span>
+          <span class="trait">Strong values</span>
+        </div>
+        <p class="detail-text">MS in Regulatory Affairs · Northeastern University<br>Intern at Johnson & Johnson</p>
+        <p class="highlight">Someone worth being intentional about.</p>
+        <div class="feba-extra-photos">
+          <img src="feba2.png" alt="Feba silly" class="feba-mini" />
+          <img src="feba3.png" alt="Feba FaceTime" class="feba-mini" />
+        </div>
+      </div>
+    </div>
+    <div class="mission-box fade-in">
+      <h4>Mission</h4>
+      <p>To determine if this could become something meaningful, lasting, and God-centered.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENT -->
+<section class="slide" id="slide-commitment">
+  <div class="slide-inner">
+    <div class="section-label fade-in" style="justify-content: center;">Commitment Day</div>
+    <div class="commitment-date fade-in">19</div>
+    <div class="commitment-month fade-in">February</div>
+    <p class="commitment-action fade-in">Present the Letter</p>
+    <p class="commitment-rule fade-in">Can only proceed with both parties' signatures.<br>No signatures = No execution of plan.</p>
+    <div class="signature-block fade-in">
+      <div class="signature-line"><div class="line"></div><span>Stephen Johnson</span></div>
+      <div class="signature-line"><div class="line"></div><span>Feba Fredie</span></div>
+    </div>
+    <div class="commitment-note fade-in">
+      <p>This is not pressure.</p>
+      <p>This is clarity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="slide" id="slide-roadmap">
+  <div class="slide-inner">
+    <div class="section-label fade-in">Phase 1 · The Foundation</div>
+    <div class="timeline">
+      <div class="timeline-item fade-in">
+        <div class="tl-date">January 12, 2026</div>
+        <div class="tl-title">Feba First Text</div>
+        <div class="tl-details">Initial spark. Conversation begins. <br><span class="tag tag-jnj">Same day: Feba starts J&J internship</span></div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="tl-date">January 13, 2026</div>
+        <div class="tl-title">First FaceTime Call</div>
+        <div class="tl-details">Chemistry assessment. Voice confirmation. Smiles verified. ✓</div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="tl-date">February 19, 2026</div>
+        <div class="tl-title">First Date + Commitment Day</div>
+        <div class="tl-details">Present the Letter. Mutual clarity. Signatures required. <span class="tag tag-milestone">Milestone</span></div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="tl-date">March 1, 2026</div>
+        <div class="tl-title">Second Date</div>
+        <div class="tl-details">Momentum check. Intentionality confirmed.</div>
+      </div>
+      <div class="timeline-item special fade-in">
+        <div class="tl-date">March 2, 2026</div>
+        <div class="tl-title">Elope & Get Married</div>
+        <div class="tl-details"><span class="tag tag-ambitious">Highly Ambitious Projection</span></div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="tl-date">March 3, 2026</div>
+        <div class="tl-title">Stephen Returns to Philadelphia</div>
+        <div class="tl-details">Long distance arc begins.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPANSION -->
+<section class="slide" id="slide-expansion">
+  <div class="slide-inner">
+    <div class="section-label fade-in" style="justify-content: center;">The Aggressive Expansion Plan</div>
+    <h2 class="expansion-heading fade-in">Strategic Life<br><span style="color: var(--gold);">Acceleration Model</span></h2>
+    <div class="expansion-cards">
+      <div class="exp-card fade-in">
+        <div class="exp-date">4</div>
+        <div class="exp-month">March</div>
+        <div class="exp-detail">Stephen files <strong>Form I-130</strong><br>Feba files <strong>Form I-485</strong></div>
+      </div>
+      <div class="exp-card fade-in">
+        <div class="exp-date">5</div>
+        <div class="exp-month">March</div>
+        <div class="exp-detail">Stephen & Feba live<br><strong>happily ever after</strong></div>
+      </div>
+    </div>
+    <p class="happily-ever-after fade-in">😘</p>
+  </div>
+</section>
+
+<!-- LOGISTICS -->
+<section class="slide" id="slide-logistics">
+  <div class="slide-inner">
+    <div class="section-label fade-in">Phase 2 · Logistics & Life Integration</div>
+    <div class="logistics-grid">
+      <div class="log-card fade-in">
+        <div class="log-icon">✈️</div>
+        <div class="log-dates">April 2–11</div>
+        <h3>California Return</h3>
+        <ul class="sub-items">
+          <li>Return to California April 2</li>
+          <li>Work trip: San Diego (Apr 3–10)</li>
+          <li>Possible weekend together</li>
+          <li>Return to Irvine April 11</li>
+        </ul>
+      </div>
+      <div class="log-card fade-in">
+        <div class="log-icon">🇮🇳</div>
+        <div class="log-dates">May 7–17</div>
+        <h3>India Trip</h3>
+        <ul class="sub-items">
+          <li>Meet Feba's parents</li>
+          <li>Cultural integration</li>
+          <li>Father approval quest</li>
+        </ul>
+      </div>
+      <div class="log-card fade-in">
+        <div class="log-icon">🏢</div>
+        <div class="log-dates">Jan 12 – Jul 3</div>
+        <h3>Feba @ J&J</h3>
+        <ul class="sub-items">
+          <li>Johnson & Johnson internship</li>
+          <li>Started the day we first talked</li>
+          <li>Finishes July 3, 2026</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPOSAL -->
+<section class="slide" id="slide-proposal">
+  <div class="slide-inner">
+    <div class="section-label fade-in" style="justify-content: center;">The Unknown Period</div>
+    <div class="ring-glow fade-in"><span>💍</span></div>
+    <h2 class="proposal-heading fade-in">Proposal Window<br><span style="color: var(--gold);">Activated</span></h2>
+    <p class="proposal-window fade-in">May – July 2026</p>
+    <div class="proposal-steps fade-in">
+      <div class="p-step"><div class="step-num">01</div><div class="step-text">Intentional<br>Growth</div></div>
+      <div class="p-step"><div class="step-num">02</div><div class="step-text">Prayer<br>Alignment</div></div>
+      <div class="p-step"><div class="step-num">03</div><div class="step-text">Ring<br>Acquisition</div></div>
+      <div class="p-step"><div class="step-num">04</div><div class="step-text">Kneeling<br>Execution</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMER EVENTS -->
+<section class="slide" id="slide-summer">
+  <div class="slide-inner">
+    <div class="section-label fade-in" style="justify-content: center;">Summer 2026 · Key Events</div>
+    <div class="jnj-callout fade-in">
+      <p>July 3 — Feba finishes her internship at Johnson & Johnson</p>
+      <span class="jnj-note">She started January 12 — the same day the first text was sent.</span>
+    </div>
+    <div class="dual-events">
+      <div class="event-card pcnak fade-in">
+        <div class="ev-icon">⛪</div>
+        <div class="ev-dates">July 3–5 · Chicago</div>
+        <div class="ev-title">PCNAK</div>
+        <div class="ev-sub">Convention</div>
+        <div class="ev-items">
+          <div class="ev-item">Faith community gathering</div>
+          <div class="ev-item">Stay extra day to hang with you & brother</div>
+          <div class="ev-item">Quality time window</div>
+        </div>
+      </div>
+      <div class="event-card fade-in">
+        <div class="ev-icon">🌴</div>
+        <div class="ev-dates">July 16–19 · México</div>
+        <div class="ev-title">Cancún</div>
+        <div class="ev-sub">Bibin's Wedding</div>
+        <div class="ev-items">
+          <div class="ev-item">Soft launch as official couple</div>
+          <div class="ev-item">Engagement energy</div>
+          <div class="ev-item">Romantic beach moment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT -->
+<section class="slide" id="slide-engagement">
+  <div class="slide-inner">
+    <div class="section-label fade-in" style="justify-content: center;">Engagement Phase</div>
+    <p class="engagement-period fade-in">August – September 2026</p>
+    <h2 class="engagement-heading fade-in">India Trip</h2>
+    <p class="engagement-sub fade-in">Formal Indian Engagement</p>
+    <div class="engagement-items fade-in">
+      <div class="eng-item"><div class="eng-icon">🇮🇳</div><p>Formal Indian<br>Engagement</p></div>
+      <div class="eng-item"><div class="eng-icon">🙏</div><p>Family<br>Blessing</p></div>
+      <div class="eng-item"><div class="eng-icon">🎉</div><p>Celebration</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NORTHEASTERN -->
+<section class="slide" id="slide-northeastern">
+  <div class="slide-inner">
+    <div class="section-label fade-in" style="justify-content: center;">The Final Semester</div>
+    <p class="neu-period fade-in">September – December 2026</p>
+    <h2 class="neu-heading fade-in">Feba Graduates <span style="color: var(--gold);">Northeastern</span></h2>
+    <p class="neu-sub fade-in">The finish line</p>
+    <div class="neu-card fade-in">
+      <div class="neu-school">Northeastern University</div>
+      <div class="neu-degree">M.S. in Regulatory Affairs</div>
+      <div class="neu-detail">Feba's last semester. Finishing what she started — strong, focused, and almost there.</div>
+      <div class="neu-note">She does big things. This is one of them.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEDDING -->
+<section class="slide" id="slide-wedding">
+  <div class="slide-inner">
+    <div class="section-label fade-in">The Wedding Decision</div>
+    <div class="wedding-options">
+      <div class="wedding-option fade-in">
+        <div class="opt-label">Option 1</div>
+        <div class="opt-date">February 6, 2027</div>
+        <div class="opt-numeric">2 · 6 · 27</div>
+        <div class="opt-detail">She = 26 &nbsp;|&nbsp; You = 27<br>Memorable symmetry</div>
+      </div>
+      <div class="wedding-option fade-in">
+        <div class="opt-label">Option 2</div>
+        <div class="opt-date">February 7, 2027</div>
+        <div class="opt-numeric">2 · 7 · 27</div>
+        <div class="opt-detail">Afternoon or Evening Ceremony</div>
+      </div>
+    </div>
+    <div class="spiritual-note fade-in">
+      <div class="sn-label">Spiritual Note</div>
+      <blockquote>God spoke to Dad and gave him the number: "27"</blockquote>
+      <p>Choosing this date feels like honoring what God revealed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="slide" id="slide-final">
+  <div class="slide-inner">
+    <div class="final-photos fade-in">
+      <img src="stephen1.jpeg" alt="Stephen" class="final-photo" />
+      <img src="feba1.jpeg" alt="Feba" class="final-photo" />
+    </div>
+    <h2 class="final-heading fade-in">The <span style="color: var(--gold);">Game Plan</span></h2>
+    <div class="final-words fade-in">
+      <span class="final-word">Intentional</span>
+      <span class="final-word">Prayerful</span>
+      <span class="final-word">Bold</span>
+    </div>
+    <p class="final-question fade-in">Any questions?</p>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.nav-dot');
+
+const slideObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const index = Array.from(slides).indexOf(entry.target);
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[index]) dots[index].classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+
+slides.forEach(slide => slideObserver.observe(slide));
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const index = parseInt(dot.dataset.slide);
+    slides[index].scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>

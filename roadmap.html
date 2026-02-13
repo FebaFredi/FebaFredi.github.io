@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Game Plan</title>
+<title>The Roadmap</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -59,6 +59,125 @@ body {
   z-index: 2;
 }
 
+/* ====== PASSWORD SCREEN ====== */
+#password-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#password-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pw-container {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 40px;
+}
+
+.pw-lock {
+  font-size: 48px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.pw-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--cream);
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+.pw-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
+.pw-input-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+.pw-input {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(201,169,110,0.25);
+  background: rgba(201,169,110,0.05);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.pw-input::placeholder {
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.pw-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(201,169,110,0.15);
+}
+
+.pw-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--gold);
+  background: rgba(201,169,110,0.1);
+  color: var(--gold);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1s forwards;
+}
+
+.pw-btn:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.pw-error {
+  font-size: 13px;
+  color: var(--rose);
+  margin-top: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  height: 20px;
+}
+
+.pw-error.show { opacity: 1; }
+
+/* ====== NAV DOTS ====== */
 .nav-dots {
   position: fixed;
   right: 24px;
@@ -439,6 +558,20 @@ body {
 </head>
 <body>
 
+<!-- PASSWORD SCREEN -->
+<div id="password-screen">
+  <div class="pw-container">
+    <div class="pw-lock">🔒</div>
+    <h2 class="pw-title">The Roadmap</h2>
+    <p class="pw-subtitle">This document is confidential</p>
+    <div class="pw-input-wrapper">
+      <input type="password" class="pw-input" id="pwInput" placeholder="Enter password" autocomplete="off" />
+    </div>
+    <button class="pw-btn" id="pwBtn">Unlock</button>
+    <p class="pw-error" id="pwError">Incorrect password. Try again.</p>
+  </div>
+</div>
+
 <nav class="nav-dots" id="navDots">
   <div class="nav-dot active" data-slide="0" data-label="Title"></div>
   <div class="nav-dot" data-slide="1" data-label="About"></div>
@@ -459,8 +592,8 @@ body {
   <div class="slide-inner">
     <div class="title-layout">
       <div>
-        <div class="title-badge">Strategic Vision · 2026</div>
-        <h1 class="title-main">The <span class="gold">Game</span><br>Plan</h1>
+        <div class="title-badge">Strategic Roadmap · 2026</div>
+        <h1 class="title-main">The <span class="gold">Road</span><br>map</h1>
         <p class="title-subtitle">A Strategic Vision for Something That Could Be Beautiful</p>
         <div class="title-meta">
           <span>Stephen Johnson</span>
@@ -756,7 +889,7 @@ body {
       <img src="stephen1.jpeg" alt="Stephen" class="final-photo" />
       <img src="feba1.jpeg" alt="Feba" class="final-photo" />
     </div>
-    <h2 class="final-heading fade-in">The <span style="color: var(--gold);">Game Plan</span></h2>
+    <h2 class="final-heading fade-in">The <span style="color: var(--gold);">Roadmap</span></h2>
     <div class="final-words fade-in">
       <span class="final-word">Intentional</span>
       <span class="final-word">Prayerful</span>
@@ -767,6 +900,32 @@ body {
 </section>
 
 <script>
+// Password protection
+const CORRECT_PASSWORD = 'feba';
+const pwScreen = document.getElementById('password-screen');
+const pwInput = document.getElementById('pwInput');
+const pwBtn = document.getElementById('pwBtn');
+const pwError = document.getElementById('pwError');
+
+document.body.style.overflow = 'hidden';
+
+function tryUnlock() {
+  if (pwInput.value.toLowerCase().trim() === CORRECT_PASSWORD) {
+    pwScreen.classList.add('hidden');
+    document.body.style.overflow = '';
+  } else {
+    pwError.classList.add('show');
+    pwInput.value = '';
+    pwInput.focus();
+    setTimeout(() => pwError.classList.remove('show'), 2500);
+  }
+}
+
+pwBtn.addEventListener('click', tryUnlock);
+pwInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+pwInput.focus();
+
+// Fade-in observer
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {

@@ -420,6 +420,48 @@ body {
 .commitment-note p:first-child { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
 .commitment-note p:last-child { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--gold); font-weight: 600; }
 
+.commitment-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(201,169,110,0.2);
+  background: rgba(201,169,110,0.04);
+  text-decoration: none;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.commitment-link:hover {
+  border-color: var(--gold);
+  background: rgba(201,169,110,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201,169,110,0.1);
+}
+
+.commitment-link-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.commitment-link-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 2px;
+}
+
+.commitment-link-sub {
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
 /* ====== TIMELINE ====== */
 .timeline { position: relative; padding-left: 40px; }
 .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--gold), var(--gold-dark), transparent); }
@@ -544,7 +586,7 @@ body {
   .title-photos { justify-content: center; }
   .title-photo.main { width: 130px; height: 170px; }
   .title-photo.secondary { width: 100px; height: 140px; }
-  .about-grid, .expansion-cards, .logistics-grid, .wedding-options, .dual-events { grid-template-columns: 1fr; }
+  .about-grid, .expansion-cards, .logistics-grid, .wedding-options, .dual-events { grid-template-columns: 1fr !important; }
   .proposal-steps { grid-template-columns: repeat(2, 1fr); }
   .signature-block { gap: 30px; }
   .signature-line { width: 140px; }
@@ -584,7 +626,8 @@ body {
   <div class="nav-dot" data-slide="8" data-label="Engagement"></div>
   <div class="nav-dot" data-slide="9" data-label="Northeastern"></div>
   <div class="nav-dot" data-slide="10" data-label="Wedding"></div>
-  <div class="nav-dot" data-slide="11" data-label="Final"></div>
+  <div class="nav-dot" data-slide="11" data-label="Next Steps"></div>
+  <div class="nav-dot" data-slide="12" data-label="Final"></div>
 </nav>
 
 <!-- TITLE -->
@@ -592,8 +635,8 @@ body {
   <div class="slide-inner">
     <div class="title-layout">
       <div>
-        <div class="title-badge">Strategic Roadmap · 2026</div>
-        <h1 class="title-main">The <span class="gold">Road</span><br>map</h1>
+        <div class="title-badge">Strategic Vision · 2026</div>
+        <h1 class="title-main">The <span class="gold">Game</span><br>Plan</h1>
         <p class="title-subtitle">A Strategic Vision for Something That Could Be Beautiful</p>
         <div class="title-meta">
           <span>Stephen Johnson</span>
@@ -628,6 +671,7 @@ body {
           <span class="trait">Intentional</span>
         </div>
         <p class="detail-text">Big on commitment, leadership, and building a God-centered home.</p>
+        <p class="detail-text" style="font-size:12px; margin-top:8px; color: var(--gold-dark);">Born March 2, 1999 · Torresdale Hospital, Philadelphia, PA</p>
         <p class="highlight">Likes a girl named Feba Fredie ♡</p>
       </div>
       <div class="about-card fade-in">
@@ -641,6 +685,7 @@ body {
           <span class="trait">Strong values</span>
         </div>
         <p class="detail-text">MS in Regulatory Affairs · Northeastern University<br>Intern at Johnson & Johnson</p>
+        <p class="detail-text" style="font-size:12px; margin-top:8px; color: var(--gold-dark);">Born November 10, 2000 · Jubilee Mission Medical College, Thrissur, Kerala, India</p>
         <p class="highlight">Someone worth being intentional about.</p>
         <div class="feba-extra-photos">
           <img src="feba2.png" alt="Feba silly" class="feba-mini" />
@@ -671,6 +716,14 @@ body {
       <p>This is not pressure.</p>
       <p>This is clarity.</p>
     </div>
+
+    <a href="commitment-document.html" class="commitment-link fade-in">
+      <img src="chronos-logo.png" alt="Chronos Media" class="commitment-link-logo" />
+      <div>
+        <div class="commitment-link-title">View Official Commitment Document</div>
+        <div class="commitment-link-sub">Signatures required to proceed →</div>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -679,6 +732,19 @@ body {
   <div class="slide-inner">
     <div class="section-label fade-in">Phase 1 · The Foundation</div>
     <div class="timeline">
+      <div class="timeline-item special fade-in">
+        <div class="tl-date">March 2, 1999</div>
+        <div class="tl-title">Stephen Johnson is Born</div>
+        <div class="tl-details">Torresdale Hospital · 10800 Knights Rd, Philadelphia, PA 19114</div>
+      </div>
+      <div class="timeline-item special fade-in">
+        <div class="tl-date">November 10, 2000</div>
+        <div class="tl-title">Feba Fredie is Born</div>
+        <div class="tl-details">Jubilee Mission Medical College & Research Institute · Nellikunnu, Thrissur, Kerala 680005, India</div>
+      </div>
+      <div class="timeline-item fade-in" style="margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid rgba(201,169,110,0.08);">
+        <div class="tl-details" style="font-style:italic; color:var(--gold-dark); font-size:12px; letter-spacing:1px;">— 26 years later —</div>
+      </div>
       <div class="timeline-item fade-in">
         <div class="tl-date">January 12, 2026</div>
         <div class="tl-title">Feba First Text</div>
@@ -746,8 +812,9 @@ body {
         <ul class="sub-items">
           <li>Return to California April 2</li>
           <li>Work trip: San Diego (Apr 3–10)</li>
-          <li>Possible weekend together</li>
+          <li>Possible weekend together in San Diego</li>
           <li>Return to Irvine April 11</li>
+          <li>Take Feba for her driving license exam</li>
         </ul>
       </div>
       <div class="log-card fade-in">
@@ -798,7 +865,19 @@ body {
       <p>July 3 — Feba finishes her internship at Johnson & Johnson</p>
       <span class="jnj-note">She started January 12 — the same day the first text was sent.</span>
     </div>
-    <div class="dual-events">
+    <div class="dual-events" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="event-card fade-in" style="border-color: rgba(201,169,110,0.2);">
+        <div class="ev-icon">🚗</div>
+        <div class="ev-dates">June 29 · Irvine</div>
+        <div class="ev-title">Road Trip</div>
+        <div class="ev-sub">Irvine → Chicago</div>
+        <div class="ev-items">
+          <div class="ev-item">Stephen flies to Irvine</div>
+          <div class="ev-item">Help Feba pack</div>
+          <div class="ev-item">Drive to Chicago together</div>
+          <div class="ev-item">The ultimate road trip arc</div>
+        </div>
+      </div>
       <div class="event-card pcnak fade-in">
         <div class="ev-icon">⛪</div>
         <div class="ev-dates">July 3–5 · Chicago</div>
@@ -806,8 +885,10 @@ body {
         <div class="ev-sub">Convention</div>
         <div class="ev-items">
           <div class="ev-item">Faith community gathering</div>
-          <div class="ev-item">Stay extra day to hang with you & brother</div>
-          <div class="ev-item">Quality time window</div>
+          <div class="ev-item">Stay extra day or two to explore Chicago</div>
+          <div class="ev-item">Drive from Chicago to Boston together to drop off Feba</div>
+          <div class="ev-item">Hopefully Feba comes to Philadelphia for a little bit</div>
+          <div class="ev-item">Then fly to Cancún together from there ✈️</div>
         </div>
       </div>
       <div class="event-card fade-in">
@@ -865,19 +946,83 @@ body {
         <div class="opt-label">Option 1</div>
         <div class="opt-date">February 6, 2027</div>
         <div class="opt-numeric">2 · 6 · 27</div>
-        <div class="opt-detail">She = 26 &nbsp;|&nbsp; You = 27<br>Memorable symmetry</div>
+        <div class="opt-detail">Feba = 26 &nbsp;|&nbsp; Stephen = 27<br>Memorable symmetry</div>
       </div>
       <div class="wedding-option fade-in">
         <div class="opt-label">Option 2</div>
         <div class="opt-date">February 7, 2027</div>
         <div class="opt-numeric">2 · 7 · 27</div>
-        <div class="opt-detail">Afternoon or Evening Ceremony</div>
+        <div class="opt-detail">Afternoon or Evening Ceremony<br>After church is finished so everyone can attend</div>
+        <div class="spiritual-note fade-in" style="margin-top:16px; text-align:center;">
+          <div class="sn-label">Spiritual Note</div>
+          <blockquote>God spoke to Dad and gave him the number: "27"</blockquote>
+          <p>Choosing this date feels like honoring what God revealed.</p>
+        </div>
       </div>
     </div>
-    <div class="spiritual-note fade-in">
-      <div class="sn-label">Spiritual Note</div>
-      <blockquote>God spoke to Dad and gave him the number: "27"</blockquote>
-      <p>Choosing this date feels like honoring what God revealed.</p>
+
+    <div class="fade-in" style="text-align:center; padding:26px; border-radius:16px; border:1px solid rgba(201,169,110,0.2); background:rgba(201,169,110,0.04); margin-bottom:28px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px;">In Loving Memory</div>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; color:var(--cream); line-height:1.6; margin-bottom:8px;">Stephen's Appachan's wedding anniversary was February 8th.</p>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin-bottom:8px;">One week before he passed, his final desire was to see Stephen get married.</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:17px; font-style:italic; color:var(--rose-soft);">Choosing a date near February 8th honors his memory and fulfills his dying wish. 🕊️</p>
+    </div>
+
+    <div style="height: 30px;"></div>
+
+    <div class="honeymoon-card fade-in" style="text-align:center; padding:32px; border-radius:16px; border:1px solid rgba(100,180,237,0.15); background:rgba(100,180,237,0.04);">
+      <div style="font-size:40px; margin-bottom:12px;">🇮🇸</div>
+      <div style="font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#a0c0f0; margin-bottom:6px;">Honeymoon · Feb 7–14, 2027</div>
+      <div style="font-family:'Playfair Display',serif; font-size:30px; font-weight:900; color:var(--cream); margin-bottom:8px;">Iceland</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:var(--text-secondary); margin-bottom:16px;">After we get married until Valentine's Day</div>
+      <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
+        <div style="font-size:13px; color:var(--cream-dim);">✦ Northern Lights</div>
+        <div style="font-size:13px; color:var(--cream-dim);">✦ Blue Lagoon</div>
+        <div style="font-size:13px; color:var(--cream-dim);">✦ Glaciers & Waterfalls</div>
+        <div style="font-size:13px; color:var(--cream-dim);">✦ Valentine's Day 💕</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section class="slide" id="slide-nextsteps">
+  <div class="slide-inner">
+    <div class="section-label fade-in" style="justify-content: center;">Next Steps</div>
+    <h2 style="font-family:'Playfair Display',serif; font-size:clamp(28px,4vw,44px); font-weight:900; text-align:center; margin-bottom:36px;" class="fade-in">Earning Points <span style="color:var(--gold);">Together</span> 🥰</h2>
+
+    <div style="display:grid; grid-template-columns:1fr; gap:20px; max-width:650px; margin:0 auto;">
+
+      <div class="fade-in" style="padding:28px; border-radius:16px; border:1px solid rgba(201,169,110,0.15); background:rgba(201,169,110,0.04); display:flex; gap:20px; align-items:flex-start;">
+        <div style="font-size:32px; flex-shrink:0;">💳</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--cream); margin-bottom:6px;">Present the Bilt Card to Feba</div>
+          <div style="font-size:14px; color:var(--text-secondary); line-height:1.6;">If the card has arrived — hand it over. She is now an authorized user. Welcome to the team.</div>
+          <span class="tag tag-milestone" style="margin-top:8px;">Priority One</span>
+        </div>
+      </div>
+
+      <div class="fade-in" style="padding:28px; border-radius:16px; border:1px solid rgba(201,169,110,0.12); background:rgba(201,169,110,0.03); display:flex; gap:20px; align-items:flex-start;">
+        <div style="font-size:32px; flex-shrink:0;">📱</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--cream); margin-bottom:6px;">Add Card to Her Apple Pay</div>
+          <div style="font-size:14px; color:var(--text-secondary); line-height:1.6;">If card hasn't arrived yet — at minimum, add your card to her Apple Pay so she can start using it immediately.</div>
+          <span class="tag tag-ambitious" style="margin-top:8px;">Backup Plan</span>
+        </div>
+      </div>
+
+      <div class="fade-in" style="padding:28px; border-radius:16px; border:1px solid rgba(201,169,110,0.12); background:rgba(201,169,110,0.03); display:flex; gap:20px; align-items:flex-start;">
+        <div style="font-size:32px; flex-shrink:0;">🔑</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--cream); margin-bottom:6px;">Share Her Account Info</div>
+          <div style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Give Feba her own authorized user account details so she can pay directly and start building points on her own.</div>
+        </div>
+      </div>
+
+      <div class="fade-in" style="text-align:center; padding:22px; border-radius:12px; border:1px solid rgba(196,114,127,0.15); background:rgba(196,114,127,0.04); margin-top:8px;">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; color:var(--rose-soft); line-height:1.5;">Every swipe is a step toward building our life together. Earn points for future trips together. ✈️✨</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -889,7 +1034,7 @@ body {
       <img src="stephen1.jpeg" alt="Stephen" class="final-photo" />
       <img src="feba1.jpeg" alt="Feba" class="final-photo" />
     </div>
-    <h2 class="final-heading fade-in">The <span style="color: var(--gold);">Roadmap</span></h2>
+    <h2 class="final-heading fade-in">The <span style="color: var(--gold);">Game Plan</span></h2>
     <div class="final-words fade-in">
       <span class="final-word">Intentional</span>
       <span class="final-word">Prayerful</span>

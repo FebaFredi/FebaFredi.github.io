@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Official Commitment Document</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+:root {
+  --gold: #C9A96E;
+  --gold-light: #E8D5A8;
+  --gold-dark: #8B7340;
+  --navy: #0A0E1A;
+  --header-bg: #2C3E50;
+  --cream: #F5F0E8;
+  --cream-dim: #E8E0D0;
+  --rose: #C4727F;
+  --rose-soft: #D4949E;
+  --text-primary: #F5F0E8;
+  --text-secondary: rgba(245, 240, 232, 0.65);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* ====== HEADER - matching invoice exactly ====== */
+.letterhead {
+  background: #384C5F;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lh-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.lh-logo-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.lh-text-block {}
+
+.lh-company {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 1.5px;
+}
+
+.lh-tagline {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 2px;
+}
+
+.lh-contact {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
+}
+
+/* ====== FOOTER - matching invoice exactly ====== */
+.doc-footer {
+  background: #384C5F;
+  padding: 14px 48px;
+  text-align: center;
+}
+
+.doc-footer p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ====== DOCUMENT BODY ====== */
+.document-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 50px 48px 60px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  text-decoration: none;
+  margin-bottom: 36px;
+  transition: color 0.3s;
+}
+
+.back-link:hover { color: var(--gold); }
+
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.doc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--cream);
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+
+.doc-title .gold { color: var(--gold); }
+
+.doc-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), rgba(201,169,110,0.1));
+  margin: 28px 0;
+}
+
+.doc-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--cream-dim);
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.doc-body strong {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.doc-body-italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.and-divider {
+  text-align: center;
+  font-size: 16px;
+  color: var(--gold-dark);
+  margin: 8px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+
+.doc-meta {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--cream-dim);
+}
+
+.doc-meta span {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ====== SIGNATURE AREA ====== */
+.signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin: 44px 0;
+}
+
+.sig-block { text-align: left; }
+
+.sig-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.sig-canvas-wrapper {
+  position: relative;
+  border: 1.5px dashed rgba(201,169,110,0.3);
+  border-radius: 10px;
+  background: rgba(201,169,110,0.03);
+  height: 120px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  cursor: crosshair;
+  transition: border-color 0.3s;
+}
+
+.sig-canvas-wrapper:hover {
+  border-color: rgba(201,169,110,0.5);
+}
+
+.sig-canvas-wrapper.signed {
+  border-style: solid;
+  border-color: rgba(201,169,110,0.4);
+  background: rgba(201,169,110,0.06);
+}
+
+.sig-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sig-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  color: rgba(201,169,110,0.35);
+  pointer-events: none;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.sig-placeholder.hidden { display: none; }
+
+.sig-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 2px;
+}
+
+.sig-role {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.sig-actions {
+  margin-top: 6px;
+}
+
+.sig-clear {
+  font-size: 11px;
+  color: var(--rose-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.sig-clear.show { opacity: 1; }
+.sig-clear:hover { color: var(--rose); }
+
+/* ====== VERSE ====== */
+.verse-block {
+  text-align: center;
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid rgba(201,169,110,0.12);
+  background: rgba(201,169,110,0.03);
+  margin: 36px 0 24px;
+}
+
+.verse-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.verse-ref {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+/* ====== EXIT CLAUSE ====== */
+.exit-clause {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(245,240,232,0.08);
+  background: rgba(245,240,232,0.02);
+  margin-bottom: 36px;
+}
+
+.exit-clause p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ====== EXPORT BUTTON ====== */
+.export-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--gold);
+  background: rgba(201,169,110,0.08);
+  color: var(--gold);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.export-btn:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.export-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.export-btn:disabled:hover {
+  background: rgba(201,169,110,0.08);
+  color: var(--gold);
+}
+
+.export-status {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 640px) {
+  .letterhead { flex-direction: column; gap: 12px; padding: 16px 24px; text-align: center; }
+  .lh-left { flex-direction: column; align-items: center; }
+  .lh-contact { text-align: center; }
+  .document-wrapper { padding: 32px 20px 50px; }
+  .doc-title { font-size: 28px; }
+  .signatures { grid-template-columns: 1fr; gap: 28px; }
+  .doc-footer { padding: 12px 20px; }
+}
+
+@media print {
+  .back-link, .export-btn, .export-status, .sig-clear, .sig-placeholder { display: none !important; }
+  body { background: white; color: #222; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="letterhead" id="docHeader">
+  <div class="lh-left">
+    <img src="chronos-logo.png" alt="Chronos Media" class="lh-logo-img" />
+    <div class="lh-text-block">
+      <div class="lh-company">CHRONOS MEDIA LIVE LLC</div>
+      <div class="lh-tagline">Livestreaming | Photos | Audio | Web Design</div>
+    </div>
+  </div>
+  <div class="lh-contact">
+    chronosmedia.to<br>
+    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a6cbc3c2cfc7e6c5ced4c9c8c9d5cbc3c2cfc788d2c9">[email&#160;protected]</a><br>
+    267-535-0921
+  </div>
+</header>
+
+<!-- CONTENT -->
+<div class="document-wrapper" id="docContent">
+
+  <a href="the-game-plan.html" class="back-link">&#8592; Back to The Game Plan</a>
+
+  <div class="section-label">Commitment Day &middot; February 19, 2026</div>
+
+  <h1 class="doc-title">Official <span class="gold">Commitment</span> Document</h1>
+  <p class="doc-subtitle">Praise the Lord!</p>
+
+  <div class="divider"></div>
+
+  <p class="doc-body">
+    It was decided at the gathering of both parties, in Irvine, California, on Wednesday, the 19th day of February, in the year of our Lord 2026, that God willing, a commitment to pursue a meaningful, intentional, and God-centered relationship is hereby established between:
+  </p>
+
+  <p class="doc-body">
+    <strong>Stephen Johnson</strong>, son of Mr. Johnson Zachariah (father), and Mrs. Shiji Johnson (mother), born on the 2nd day of March, in the year of our Lord 1999, at Torresdale Hospital, 10800 Knights Rd, Philadelphia, PA 19114, in the Commonwealth of Pennsylvania,
+  </p>
+
+  <p class="and-divider">&mdash; and &mdash;</p>
+
+  <p class="doc-body">
+    <strong>Feba Fredie</strong>, daughter of Mr. Fredi Fredi (father), and Mrs. Amma Fredi (mother), born on the 10th day of November, in the year of our Lord 2000, at Jubilee Mission Medical College and Research Institute, P.B 737, Fathima Nagar, Mahatma Nagar, Nellikunnu, Thrissur, Kerala 680005, India.
+  </p>
+
+  <div class="divider"></div>
+
+  <p class="doc-body">
+    Both parties, of their own free will and with clear intention, agree to pursue this relationship with prayer, honesty, and the shared goal of discerning whether God is leading them toward Holy Matrimony. This document serves as a mutual declaration of commitment, clarity, and intentionality.
+  </p>
+
+  <p class="doc-body-italic">
+    This commitment can only proceed with the signatures of both parties below. No signatures means no execution of this plan. This is not pressure &mdash; this is clarity.
+  </p>
+
+  <div class="divider"></div>
+
+  <p class="doc-meta"><span>Date:</span>&nbsp; February 19, 2026</p>
+  <p class="doc-meta"><span>Location:</span>&nbsp; Irvine, California</p>
+
+  <!-- SIGNATURES -->
+  <div class="signatures">
+    <div class="sig-block">
+      <div class="sig-label">Party One</div>
+      <div class="sig-canvas-wrapper" id="sigWrap1">
+        <canvas class="sig-canvas" id="sigCanvas1"></canvas>
+        <div class="sig-placeholder" id="sigPlaceholder1">Sign here<br>&#9998;</div>
+      </div>
+      <div class="sig-name">Stephen Johnson</div>
+      <div class="sig-role">(Party One)</div>
+      <div class="sig-actions">
+        <button class="sig-clear" id="sigClear1" onclick="clearSig(1)">Clear</button>
+      </div>
+    </div>
+    <div class="sig-block">
+      <div class="sig-label">Party Two</div>
+      <div class="sig-canvas-wrapper" id="sigWrap2">
+        <canvas class="sig-canvas" id="sigCanvas2"></canvas>
+        <div class="sig-placeholder" id="sigPlaceholder2">Sign here<br>&#9998;</div>
+      </div>
+      <div class="sig-name">Feba Fredie</div>
+      <div class="sig-role">(Party Two)</div>
+      <div class="sig-actions">
+        <button class="sig-clear" id="sigClear2" onclick="clearSig(2)">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERSE -->
+  <div class="verse-block">
+    <p class="verse-text">
+      &ldquo;For I know the plans I have for you,&rdquo; declares the Lord, &ldquo;plans to prosper you and not to harm you, plans to give you hope and a future.&rdquo;
+    </p>
+    <p class="verse-ref">&mdash; Jeremiah 29:11</p>
+  </div>
+
+  <!-- EXIT CLAUSE -->
+  <div class="exit-clause">
+    <p>If either party wishes to exit from this commitment, they are completely free to do so at any point before marriage. This document is a declaration of mutual intention, not a binding contract. Both parties enter willingly and may leave willingly.</p>
+  </div>
+
+  <!-- EXPORT -->
+  <button class="export-btn" id="exportBtn" disabled onclick="exportPDF()">
+    <span>&#128196;</span> Export Signed Document as PDF
+  </button>
+  <p class="export-status" id="exportStatus">Both signatures required to export</p>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="doc-footer" id="docFooter">
+  <p>&copy; 2026 Chronos Media Live LLC &bull; Capturing the Agape Moments</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Signature pad logic
+class SignaturePad {
+  constructor(canvasId, wrapperId, placeholderId, clearId, index) {
+    this.canvas = document.getElementById(canvasId);
+    this.wrapper = document.getElementById(wrapperId);
+    this.placeholder = document.getElementById(placeholderId);
+    this.clearBtn = document.getElementById(clearId);
+    this.ctx = this.canvas.getContext('2d');
+    this.drawing = false;
+    this.signed = false;
+    this.index = index;
+    this.points = [];
+
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+
+    // Mouse events
+    this.canvas.addEventListener('mousedown', (e) => this.startDraw(e));
+    this.canvas.addEventListener('mousemove', (e) => this.draw(e));
+    this.canvas.addEventListener('mouseup', () => this.stopDraw());
+    this.canvas.addEventListener('mouseleave', () => this.stopDraw());
+
+    // Touch events
+    this.canvas.addEventListener('touchstart', (e) => { e.preventDefault(); this.startDraw(e.touches[0]); }, { passive: false });
+    this.canvas.addEventListener('touchmove', (e) => { e.preventDefault(); this.draw(e.touches[0]); }, { passive: false });
+    this.canvas.addEventListener('touchend', (e) => { e.preventDefault(); this.stopDraw(); }, { passive: false });
+  }
+
+  resize() {
+    const rect = this.wrapper.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    this.canvas.width = rect.width * dpr;
+    this.canvas.height = rect.height * dpr;
+    this.canvas.style.width = rect.width + 'px';
+    this.canvas.style.height = rect.height + 'px';
+    this.ctx.scale(dpr, dpr);
+    this.ctx.strokeStyle = '#E8D5A8';
+    this.ctx.lineWidth = 2;
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
+    // Redraw
+    if (this.points.length > 0) this.redraw();
+  }
+
+  getPos(e) {
+    const rect = this.canvas.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  }
+
+  startDraw(e) {
+    this.drawing = true;
+    const pos = this.getPos(e);
+    this.points.push({ x: pos.x, y: pos.y, newStroke: true });
+    this.ctx.beginPath();
+    this.ctx.moveTo(pos.x, pos.y);
+  }
+
+  draw(e) {
+    if (!this.drawing) return;
+    const pos = this.getPos(e);
+    this.points.push({ x: pos.x, y: pos.y, newStroke: false });
+    this.ctx.lineTo(pos.x, pos.y);
+    this.ctx.stroke();
+  }
+
+  stopDraw() {
+    if (this.drawing) {
+      this.drawing = false;
+      this.ctx.closePath();
+      if (this.points.length > 2) {
+        this.signed = true;
+        this.placeholder.classList.add('hidden');
+        this.wrapper.classList.add('signed');
+        this.clearBtn.classList.add('show');
+        checkExport();
+      }
+    }
+  }
+
+  redraw() {
+    this.ctx.strokeStyle = '#E8D5A8';
+    this.ctx.lineWidth = 2;
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
+    for (let i = 0; i < this.points.length; i++) {
+      if (this.points[i].newStroke) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.points[i].x, this.points[i].y);
+      } else {
+        this.ctx.lineTo(this.points[i].x, this.points[i].y);
+        this.ctx.stroke();
+      }
+    }
+  }
+
+  clear() {
+    const rect = this.wrapper.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    this.ctx.clearRect(0, 0, rect.width * dpr, rect.height * dpr);
+    this.points = [];
+    this.signed = false;
+    this.placeholder.classList.remove('hidden');
+    this.wrapper.classList.remove('signed');
+    this.clearBtn.classList.remove('show');
+    checkExport();
+  }
+}
+
+const pad1 = new SignaturePad('sigCanvas1', 'sigWrap1', 'sigPlaceholder1', 'sigClear1', 1);
+const pad2 = new SignaturePad('sigCanvas2', 'sigWrap2', 'sigPlaceholder2', 'sigClear2', 2);
+
+function clearSig(index) {
+  if (index === 1) pad1.clear();
+  else pad2.clear();
+}
+
+function checkExport() {
+  const btn = document.getElementById('exportBtn');
+  const status = document.getElementById('exportStatus');
+  if (pad1.signed && pad2.signed) {
+    btn.disabled = false;
+    status.textContent = 'Both signatures received. Ready to export.';
+    status.style.color = '#C9A96E';
+  } else if (pad1.signed) {
+    btn.disabled = true;
+    status.textContent = 'Awaiting Feba Fredie\'s signature';
+    status.style.color = '';
+  } else if (pad2.signed) {
+    btn.disabled = true;
+    status.textContent = 'Awaiting Stephen Johnson\'s signature';
+    status.style.color = '';
+  } else {
+    btn.disabled = true;
+    status.textContent = 'Both signatures required to export';
+    status.style.color = '';
+  }
+}
+
+async function exportPDF() {
+  const btn = document.getElementById('exportBtn');
+  const status = document.getElementById('exportStatus');
+  btn.disabled = true;
+  status.textContent = 'Generating PDF...';
+  status.style.color = '#C9A96E';
+
+  // Hide non-print elements
+  document.querySelector('.back-link').style.display = 'none';
+  document.querySelector('.export-btn').style.display = 'none';
+  document.querySelector('.export-status').style.display = 'none';
+  document.querySelectorAll('.sig-clear').forEach(b => b.style.display = 'none');
+  document.querySelectorAll('.sig-placeholder').forEach(p => p.style.display = 'none');
+
+  try {
+    const { jsPDF } = window.jspdf;
+
+    // Capture header
+    const header = document.getElementById('docHeader');
+    const headerCanvas = await html2canvas(header, { scale: 2, useCORS: true, backgroundColor: '#384C5F' });
+
+    // Capture content
+    const content = document.getElementById('docContent');
+    const contentCanvas = await html2canvas(content, { scale: 2, useCORS: true, backgroundColor: '#0A0E1A' });
+
+    // Capture footer
+    const footer = document.getElementById('docFooter');
+    const footerCanvas = await html2canvas(footer, { scale: 2, useCORS: true, backgroundColor: '#384C5F' });
+
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = 210;
+    const pageHeight = 297;
+
+    // Header
+    const hRatio = pageWidth / headerCanvas.width;
+    const hH = headerCanvas.height * hRatio;
+    pdf.addImage(headerCanvas.toDataURL('image/png'), 'PNG', 0, 0, pageWidth, hH);
+
+    // Content
+    const cRatio = pageWidth / contentCanvas.width;
+    const cH = contentCanvas.height * cRatio;
+
+    let yOffset = hH;
+    const availHeight = pageHeight - hH - 12;
+
+    if (cH <= availHeight) {
+      pdf.addImage(contentCanvas.toDataURL('image/png'), 'PNG', 0, yOffset, pageWidth, cH);
+      yOffset += cH;
+    } else {
+      // Multi-page
+      const sliceHeightPx = availHeight / cRatio;
+      let srcY = 0;
+      let firstPage = true;
+
+      while (srcY < contentCanvas.height) {
+        if (!firstPage) {
+          pdf.addPage();
+          yOffset = 0;
+        }
+
+        const currentAvail = firstPage ? availHeight : pageHeight - 12;
+        const currentSlicePx = currentAvail / cRatio;
+        const remainPx = contentCanvas.height - srcY;
+        const drawPx = Math.min(currentSlicePx, remainPx);
+
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width = contentCanvas.width;
+        sliceCanvas.height = drawPx;
+        const sCtx = sliceCanvas.getContext('2d');
+        sCtx.drawImage(contentCanvas, 0, srcY, contentCanvas.width, drawPx, 0, 0, contentCanvas.width, drawPx);
+
+        const sliceH = drawPx * cRatio;
+        pdf.addImage(sliceCanvas.toDataURL('image/png'), 'PNG', 0, yOffset, pageWidth, sliceH);
+
+        srcY += drawPx;
+        yOffset += sliceH;
+        firstPage = false;
+      }
+    }
+
+    // Footer on last page
+    const fRatio = pageWidth / footerCanvas.width;
+    const fH = footerCanvas.height * fRatio;
+    if (yOffset + fH > pageHeight) {
+      pdf.addPage();
+      yOffset = pageHeight - fH;
+    } else {
+      yOffset = pageHeight - fH;
+    }
+    pdf.addImage(footerCanvas.toDataURL('image/png'), 'PNG', 0, yOffset, pageWidth, fH);
+
+    pdf.save('Commitment_Document_Stephen_Feba_Signed.pdf');
+    status.textContent = 'PDF exported successfully!';
+  } catch (err) {
+    console.error(err);
+    status.textContent = 'Export failed. Try printing instead (Ctrl+P).';
+    status.style.color = '#C4727F';
+  }
+
+  // Restore elements
+  document.querySelector('.back-link').style.display = '';
+  document.querySelect

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Stephen &amp; Feba · RSVP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-height:100vh}
+::selection{background:rgba(201,169,110,0.3);color:#F5F0E8}
+
+/* PASSWORD */
+.pw-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:#0A0E1A;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 0.6s}
+.pw-screen.unlocked{opacity:0;pointer-events:none}
+.pw-box{text-align:center;padding:32px}
+.pw-box h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#F5F0E8;margin-bottom:4px}
+.pw-box .pw-sub{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:rgba(245,240,232,0.5);margin-bottom:24px}
+.pw-box input{background:rgba(245,240,232,0.06);border:1px solid rgba(201,169,110,0.25);border-radius:10px;padding:14px 20px;font-size:16px;color:#F5F0E8;text-align:center;width:240px;outline:none;font-family:'DM Sans',sans-serif;letter-spacing:3px}
+.pw-box input:focus{border-color:#C9A96E}
+.pw-box input::placeholder{color:rgba(245,240,232,0.2);letter-spacing:1px}
+.pw-err{font-size:12px;color:#C4727F;margin-top:10px;min-height:18px}
+.pw-box button{margin-top:16px;padding:12px 36px;border-radius:10px;border:1px solid #C9A96E;background:rgba(201,169,110,0.08);color:#C9A96E;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+.pw-box button:hover{background:#C9A96E;color:#0A0E1A}
+
+/* HEADER */
+.header{background:#384C5F;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.hd-name{font-size:18px;font-weight:700;color:#fff;letter-spacing:1.5px}
+.hd-tag{font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px}
+.hd-contact{text-align:right;font-size:11px;color:rgba(255,255,255,0.8);line-height:1.7}
+
+/* WRAPPER */
+.wrap{max-width:760px;margin:0 auto;padding:40px 24px 60px}
+
+/* SECTION */
+.section-label{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A96E;margin-bottom:16px;display:flex;align-items:center;gap:16px}
+.section-label::before{content:'';width:40px;height:1px;background:#C9A96E;display:inline-block}
+.section-label.blue{color:#4DA8DA}
+.section-label.blue::before{background:#4DA8DA}
+.divider{height:1px;background:linear-gradient(90deg,#C9A96E,rgba(201,169,110,0.05));margin:36px 0}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:48}
+.hero-pre{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A96E;margin-bottom:16px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,7vw,56px);font-weight:900;line-height:1.1;margin-bottom:8px}
+.hero h1 span{color:#C9A96E}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:rgba(245,240,232,0.65);margin-bottom:16px}
+.badge{display:inline-block;padding:10px 24px;border-radius:30px;border:1px solid rgba(201,169,110,0.3);background:rgba(201,169,110,0.06);font-size:13px;font-weight:600;letter-spacing:2px;color:#C9A96E}
+
+/* INFO CARDS */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px}
+.info-card{padding:20px;border-radius:14px;text-align:center;transition:transform 0.3s}
+.info-card:hover{transform:translateY(-3px)}
+.info-card .ic-icon{font-size:28px;margin-bottom:6px}
+.info-card .ic-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.info-card .ic-val{font-size:14px;color:#E8E0D0}
+.info-card .ic-sub{font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px}
+
+/* STATS */
+.stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:36px;text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900}
+.stat-label{font-size:11px;color:rgba(245,240,232,0.5);letter-spacing:1px}
+
+/* TABLE */
+.tbl{border-radius:14px;border:1px solid rgba(245,240,232,0.06);overflow:hidden;margin-bottom:16px}
+.tbl-head{display:grid;grid-template-columns:1fr 50px 50px 50px 55px 65px;padding:12px 16px;background:rgba(201,169,110,0.06);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#C9A96E;gap:6px}
+.tbl-row{display:grid;grid-template-columns:1fr 50px 50px 50px 55px 65px;padding:10px 16px;border-top:1px solid rgba(245,240,232,0.04);font-size:13px;color:#E8E0D0;gap:6px;align-items:center}
+.tbl-row .name{font-weight:500}
+.tbl-row .dim{text-align:center;color:rgba(245,240,232,0.5)}
+.tbl-row .ctr{text-align:center}
+.tag-s{display:inline-block;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.tag-locked{background:rgba(100,200,130,0.12);color:#68c888}
+.tag-pending{background:rgba(232,131,74,0.12);color:#E8834A}
+.tag-new{background:rgba(77,168,218,0.12);color:#4DA8DA}
+
+/* NEW RSVP LIST */
+.new-rsvp{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.new-rsvp+.new-rsvp{border-top:1px solid rgba(245,240,232,0.04)}
+.new-rsvp .nr-name{font-size:14px;font-weight:600;color:#F5F0E8}
+.new-rsvp .nr-detail{font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px}
+.new-rsvp .nr-notes{font-size:11px;color:rgba(245,240,232,0.35);margin-top:2px;font-style:italic}
+
+/* RSVP BUTTON */
+.rsvp-btn{display:block;margin:0 auto 40px;padding:16px 48px;border-radius:12px;border:1px solid #C9A96E;background:rgba(201,169,110,0.08);color:#C9A96E;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+.rsvp-btn:hover{background:#C9A96E;color:#0A0E1A}
+
+/* SUCCESS */
+.success-box{text-align:center;padding:40px;border-radius:16px;border:1px solid rgba(100,200,130,0.2);background:rgba(100,200,130,0.04);margin-bottom:40px}
+.success-box .check{font-size:48px;margin-bottom:12px}
+.success-box h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#68c888;margin-bottom:8px}
+.success-box p{font-size:14px;color:rgba(245,240,232,0.65)}
+.success-box button{margin-top:16px;padding:10px 24px;border-radius:8px;border:1px solid rgba(245,240,232,0.1);background:transparent;color:rgba(245,240,232,0.5);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer}
+
+/* FORM */
+.form-card{padding:32px;border-radius:16px;border:1px solid rgba(201,169,110,0.15);background:rgba(201,169,110,0.03);margin-bottom:40px}
+.form-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:20px}
+.form-inner{max-width:400px;margin:0 auto;display:grid;gap:16px}
+.f-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#C9A96E;margin-bottom:6px;display:block}
+.f-input,.f-select,.f-textarea{width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(201,169,110,0.2);background:rgba(245,240,232,0.04);color:#F5F0E8;font-size:14px;font-family:'DM Sans',sans-serif;outline:none}
+.f-input:focus,.f-select:focus,.f-textarea:focus{border-color:#C9A96E}
+.f-input::placeholder,.f-textarea::placeholder{color:rgba(245,240,232,0.2)}
+.f-select{background:#0A0E1A}
+.f-textarea{resize:vertical}
+.f-toggle{display:flex;gap:12px}
+.f-toggle button{flex:1;padding:10px 16px;border-radius:10px;cursor:pointer;border:1px solid rgba(245,240,232,0.1);background:transparent;color:rgba(245,240,232,0.5);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;transition:all 0.2s}
+.f-toggle button.active{border-color:#C9A96E;background:rgba(201,169,110,0.1);color:#C9A96E}
+.submit-btn{padding:14px 32px;border-radius:12px;border:none;background:#C9A96E;color:#0A0E1A;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:8px;width:100%;transition:opacity 0.3s}
+.submit-btn:disabled{background:rgba(201,169,110,0.2);color:rgba(245,240,232,0.3);cursor:not-allowed}
+
+/* ADMIN */
+.admin{text-align:center;margin-top:40px}
+.admin-row{display:flex;justify-content:center;align-items:center;gap:8px}
+.admin-input{padding:8px 14px;border-radius:8px;border:1px solid rgba(245,240,232,0.08);background:rgba(245,240,232,0.02);color:rgba(245,240,232,0.4);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;width:150px}
+.admin-go{padding:8px 16px;border-radius:8px;border:1px solid rgba(245,240,232,0.08);background:transparent;color:rgba(245,240,232,0.3);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.export-btn{padding:12px 32px;border-radius:10px;border:1px solid rgba(77,168,218,0.3);background:rgba(77,168,218,0.08);color:#4DA8DA;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;cursor:pointer}
+.export-note{font-size:11px;color:rgba(245,240,232,0.35);margin-top:10px}
+
+/* FOOTER */
+.footer{background:#384C5F;padding:14px 32px;text-align:center}
+.footer p{font-size:11px;color:rgba(255,255,255,0.6)}
+
+.hidden{display:none!important}
+
+@media(max-width:640px){
+  .header{flex-direction:column;text-align:center;padding:16px 20px}
+  .hd-contact{text-align:center}
+  .wrap{padding:32px 16px 50px}
+  .tbl-head,.tbl-row{grid-template-columns:1fr 35px 35px 35px 40px 50px;font-size:10px;padding:8px 10px}
+  .stats{gap:24px}
+  .info-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="pw-screen" id="pwScreen">
+  <div class="pw-box">
+    <h2>Stephen &amp; Feba</h2>
+    <div class="pw-sub">Proposal Ceremony RSVP</div>
+    <input type="text" id="pwField" placeholder="Enter password" maxlength="20" autocomplete="off" style="-webkit-text-security:disc;text-security:disc;">
+    <div class="pw-err" id="pwErr"></div>
+    <button type="button" id="pwBtn" onclick="(function(){var f=document.getElementById('pwField'),s=document.getElementById('pwScreen'),e=document.getElementById('pwErr');if(f.value.trim()==='03062026'){s.classList.add('unlocked');document.body.style.overflow='';setTimeout(function(){s.style.display='none'},600)}else{e.textContent='Incorrect password';f.value='';f.focus()}})()">Unlock</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div>
+    <div class="hd-name">CHRONOS MEDIA LIVE LLC</div>
+    <div class="hd-tag">Livestreaming | Photos | Audio | Web Design</div>
+  </div>
+  <div class="hd-contact">chronosmedia.to<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f525a5b565e7f5c574d5051504c525a5b565e114b50">[email&#160;protected]</a><br>267-535-0921</div>
+</header>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero" style="text-align:center;margin-bottom:48px;">
+    <div class="hero-pre">You're Invited</div>
+    <h1>Stephen <span>&amp;</span> Feba</h1>
+    <p class="hero-sub">Proposal Ceremony</p>
+    <div class="badge">March 6, 2026 &middot; Point Dume, CA</div>
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="info-grid">
+    <div class="info-card" style="border:1px solid rgba(77,168,218,0.15);background:rgba(77,168,218,0.04);">
+      <div class="ic-icon">&#9963;</div>
+      <div class="ic-label" style="color:#4DA8DA;">Ceremony</div>
+      <div class="ic-val">4:00 &ndash; 5:30 PM</div>
+      <div class="ic-sub">Palisades Gazebo, Dana Point</div>
+    </div>
+    <div class="info-card" style="border:1px solid rgba(232,131,74,0.12);background:rgba(232,131,74,0.04);">
+      <div class="ic-icon">&#127860;</div>
+      <div class="ic-label" style="color:#E8834A;">Reception</div>
+      <div class="ic-val">7:00 PM</div>
+      <div class="ic-sub">Fogo De Ch&atilde;o</div>
+    </div>
+    <div class="info-card" style="border:1px solid rgba(201,169,110,0.12);background:rgba(201,169,110,0.04);">
+      <div class="ic-icon">&#127976;</div>
+      <div class="ic-label" style="color:#C9A96E;">Hotel</div>
+      <div class="ic-val">Embassy Suites</div>
+      <div class="ic-sub">All guests staying here</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div>
+      <div class="stat-num" style="color:#C9A96E;" id="statTotal">0</div>
+      <div class="stat-label">Attending</div>
+    </div>
+    <div>
+      <div class="stat-num" style="color:#4DA8DA;" id="statRooms">0</div>
+      <div class="stat-label">Hotel Rooms</div>
+    </div>
+    <div>
+      <div class="stat-num" style="color:#E8834A;" id="statFlying">0</div>
+      <div class="stat-label">Flying In</div>
+    </div>
+    <div>
+      <div class="stat-num" style="color:#68c888;" id="statReception">0</div>
+      <div class="stat-label">At Reception</div>
+    </div>
+  </div>
+
+  <!-- CONFIRMED TABLE -->
+  <div class="section-label">Confirmed Guests</div>
+  <div class="tbl">
+    <div class="tbl-head">
+      <div>Name</div>
+      <div style="text-align:center">&#9992;</div>
+      <div style="text-align:center">&#127976;</div>
+      <div style="text-align:center">&#127860;</div>
+      <div style="text-align:center">Fogo</div>
+      <div style="text-align:center">Status</div>
+    </div>
+    <div id="guestRows"></div>
+  </div>
+
+  <!-- NEW RSVPS -->
+  <div id="newRsvpSection" class="hidden">
+    <div class="section-label blue" style="margin-top:30px;">New RSVPs</div>
+    <div class="tbl" style="border-color:rgba(77,168,218,0.12);">
+      <div id="newRsvpRows"></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RSVP BUTTON -->
+  <div id="rsvpBtnWrap" style="text-align:center;">
+    <button class="rsvp-btn" id="rsvpOpenBtn">RSVP Now</button>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box hidden" id="successBox">
+    <div class="check">&#10003;</div>
+    <h3>You're In!</h3>
+    <p>Your RSVP has been recorded. We'll see you at Point Dume!</p>
+    <button id="anotherBtn">Submit Another RSVP</button>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card hidden" id="formCard">
+    <h3>RSVP</h3>
+    <div class="form-inner">
+      <div>
+        <label class="f-label">Full Name *</label>
+        <input class="f-input" id="fName" placeholder="Your name">
+      </div>
+      <div>
+        <label class="f-label">How many people attending? *</label>
+        <select class="f-select" id="fSize">
+          <option value="1">1 person</option>
+          <option value="2">2 people</option>
+          <option value="3">3 people</option>
+          <option value="4">4 people</option>
+          <option value="5">5 people</option>
+          <option value="6">6 people</option>
+          <option value="7">7 people</option>
+          <option value="8">8 people</option>
+        </select>
+      </div>
+      <div>
+        <label class="f-label">Do you have transportation arranged?</label>
+        <div class="f-toggle" id="transportToggle">
+          <button data-val="yes" class="active">Yes, I'm set</button>
+          <button data-val="no">I need transport</button>
+        </div>
+      </div>
+      <div>
+        <label class="f-label">Staying at Embassy Suites?</label>
+        <div class="f-toggle" id="hotelToggle">
+          <button data-val="yes" class="active">Yes</button>
+          <button data-val="no">No, I have my own</button>
+        </div>
+      </div>
+      <div>
+        <label class="f-label">Attending Reception at Fogo De Ch&atilde;o?</label>
+        <div class="f-toggle" id="receptionToggle">
+          <button data-val="yes" class="active">Yes</button>
+          <button data-val="no">No</button>
+        </div>
+      </div>
+      <div>
+        <label class="f-label">Phone Number</label>
+        <input class="f-input" id="fPhone" placeholder="(optional)">
+      </div>
+      <div>
+        <label class="f-label">Notes / Dietary Needs</label>
+        <textarea class="f-textarea" id="fNotes" placeholder="Anything we should know?" rows="3"></textarea>
+      </div>
+      <button class="submit-btn" id="submitBtn" disabled>Submit RSVP</button>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div class="admin">
+    <div class="admin-row" id="adminLock">
+      <input type="password" class="admin-input" id="adminPass" placeholder="Admin password">
+      <button class="admin-go" id="adminBtn">&rarr;</button>
+    </div>
+    <div id="adminPanel" class="hidden">
+      <button class="export-btn" id="exportBtn">&#128229; Export CSV for Google Sheets</button>
+      <p class="export-note">Download CSV &rarr; Open Google Sheets &rarr; File &rarr; Import &rarr; Upload</p>
+    </div>
+  </div>
+
+  <!-- FOOTER NOTE -->
+  <div style="text-align:center;margin-top:48px;padding:20px;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(245,240,232,0.4);">
+      Everyone will be staying at Embassy Suites near Point Dume.
+    </p>
+    <div id="dbStatus" style="margin-top:12px;font-size:10px;letter-spacing:1px;color:rgba(245,240,232,0.2);">
+      &#9679; Connecting to database...
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2026 Chronos Media Live LLC &middot; Capturing the Agape Moments</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  // === PASSWORD ===
+  document.body.style.overflow = 'hidden';
+  document.getElementById('pwField').addEventListener('keydown', function(e){
+    if(e.key==='Enter'){
+      document.getElementById('pwBtn').click();
+    }
+  });
+
+  // === DATA ===
+  var SUPABASE_URL = 'https://arsgzitunzhpzawpdvej.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyc2d6aXR1bnpocHphd3BkdmVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MzExOTYsImV4cCI6MjA4NzIwNzE5Nn0.WmFnIzwhB13zbbl2c_SawNGaNOYmxf_hDednCx0erBg';
+
+  var GUESTS = [
+    {name:"Prasad Abraham",airline:4,hotel:1,restaurant:4,reception:4,status:"locked"},
+    {name:"John Zach",airline:2,hotel:1,restaurant:2,reception:2,status:"locked"},
+    {name:"Vinu Joseph",airline:0,hotel:1,restaurant:3,reception:3,status:"locked"},
+    {name:"Cherian Abraham",airline:3,hotel:1,restaurant:3,reception:3,status:"locked"},
+    {name:"Abhi Patel",airline:0,hotel:0,restaurant:1,reception:1,status:"locked"},
+    {name:"Mathew D George",airline:0,hotel:1,restaurant:1,reception:1,status:"locked"},
+    {name:"Pheba",airline:1,hotel:1,restaurant:1,reception:1,status:"locked"},
+    {name:"Gigi & Bosi",airline:2,hotel:1,restaurant:2,reception:2,status:"locked"},
+    {name:"Abhi OKC",airline:0,hotel:0,restaurant:4,reception:4,status:"pending"},
+    {name:"Issac Hong",airline:0,hotel:0,restaurant:1,reception:1,status:"pending"},
+    {name:"Zach C",airline:0,hotel:0,restaurant:1,reception:1,status:"pending"},
+    {name:"Febin Fredi",airline:0,hotel:1,restaurant:1,reception:1,status:"pending"},
+    {name:"Pastor Bethel",airline:0,hotel:1,restaurant:1,reception:1,status:"pending"}
+  ];
+
+  var STORAGE_KEY = 'rsvp_proposal_ceremony_data';
+  var newRsvps = [];
+
+  // Supabase REST API helper
+  function supabaseRequest(method, body, callback){
+    var url = SUPABASE_URL + '/rest/v1/rsvp_guests';
+    if(method === 'GET') url += '?order=created_at.desc';
+    var opts = {
+      method: method,
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': method === 'POST' ? 'return=representation' : ''
+      }
+    };
+    if(body) opts.body = JSON.stringify(body);
+    fetch(url, opts)
+      .then(function(r){ return r.json(); })
+      .then(function(data){ if(callback) callback(null, data); })
+      .catch(function(err){ if(callback) callback(err, null); });
+  }
+
+  function loadRsvps(){
+    // Load from localStorage first (instant)
+    try {
+      var d = localStorage.getItem(STORAGE_KEY);
+      if(d) newRsvps = JSON.parse(d);
+      renderNewRsvps();
+      updateStats();
+    } catch(e){}
+
+    // Then sync from Supabase
+    supabaseRequest('GET', null, function(err, data){
+      var status = document.getElementById('dbStatus');
+      if(!err && Array.isArray(data)){
+        if(data.length > 0){
+          newRsvps = data.map(function(r){
+            return {
+              name: r.name,
+              partySize: r.party_size,
+              needsTransport: r.needs_transport,
+              needsHotel: r.needs_hotel,
+              phone: r.phone || '',
+              notes: r.notes || '',
+              timestamp: r.created_at,
+              supabaseId: r.id
+            };
+          });
+          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(newRsvps)); } catch(e){}
+        }
+        if(status) status.innerHTML = '<span style="color:#68c888;">&#9679;</span> Database connected &middot; Supabase';
+        renderNewRsvps();
+        updateStats();
+      } else {
+        if(status) status.innerHTML = '<span style="color:#E8834A;">&#9679;</span> Offline mode &middot; Data saved locally';
+      }
+    });
+  }
+
+  function saveRsvp(entry, callback){
+    // Save to localStorage immediately
+    newRsvps.push(entry);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(newRsvps)); } catch(e){}
+
+    // Save to Supabase
+    var sbEntry = {
+      name: entry.name,
+      party_size: entry.partySize,
+      needs_transport: entry.needsTransport,
+      needs_hotel: entry.needsHotel,
+      phone: entry.phone || null,
+      notes: entry.notes || null,
+      status: 'new'
+    };
+    supabaseRequest('POST', sbEntry, function(err, data){
+      if(err){
+        console.warn('Supabase save failed, data saved locally', err);
+      } else {
+        console.log('Saved to Supabase:', data);
+      }
+      if(callback) callback();
+    });
+  }
+
+  // === RENDER ===
+  function renderGuests(){
+    var html = '';
+    GUESTS.forEach(function(g){
+      var cls = g.status==='locked' ? 'tag-locked' : 'tag-pending';
+      var lbl = g.status==='locked' ? '&#10003;' : 'Pending';
+      html += '<div class="tbl-row">';
+      html += '<div class="name">'+g.name+'</div>';
+      html += '<div class="dim">'+(g.airline||'&mdash;')+'</div>';
+      html += '<div class="dim">'+(g.hotel||'&mdash;')+'</div>';
+      html += '<div class="ctr">'+g.restaurant+'</div>';
+      html += '<div class="ctr" style="color:#68c888;">'+(g.reception||'&mdash;')+'</div>';
+      html += '<div class="ctr"><span class="tag-s '+cls+'">'+lbl+'</span></div>';
+      html += '</div>';
+    });
+    document.getElementById('guestRows').innerHTML = html;
+  }
+
+  function renderNewRsvps(){
+    var sec = document.getElementById('newRsvpSection');
+    var container = document.getElementById('newRsvpRows');
+    if(newRsvps.length === 0){ sec.classList.add('hidden'); return; }
+    sec.classList.remove('hidden');
+    var html = '';
+    newRsvps.forEach(function(r){
+      html += '<div class="new-rsvp">';
+      html += '<div>';
+      html += '<div class="nr-name">'+esc(r.name)+'</div>';
+      html += '<div class="nr-detail">'+r.partySize+' '+(r.partySize==1?'guest':'guests');
+      html += ' &middot; Hotel: '+(r.needsHotel==='yes'?'Yes':'No');
+      html += ' &middot; Transport: '+(r.needsTransport==='yes'?'Arranged':'Needed');
+      html += ' &middot; Fogo: '+(r.attendingReception==='no'?'No':'Yes');
+      html += '</div>';
+      if(r.phone) html += '<div class="nr-detail">&#128222; '+esc(r.phone)+'</div>';
+      if(r.notes) html += '<div class="nr-notes">'+esc(r.notes)+'</div>';
+      html += '</div>';
+      html += '<span class="tag-s tag-new">NEW</span>';
+      html += '</div>';
+    });
+    container.innerHTML = html;
+  }
+
+  function updateStats(){
+    var totalGuests = 0, totalRooms = 0, totalFlying = 0, totalReception = 0;
+    GUESTS.forEach(function(g){
+      totalGuests += g.restaurant;
+      totalRooms += g.hotel;
+      totalFlying += g.airline;
+      totalReception += (g.reception || 0);
+    });
+    newRsvps.forEach(function(r){
+      var ps = parseInt(r.partySize)||1;
+      totalGuests += ps;
+      totalReception += ps;
+      if(r.needsHotel==='yes') totalRooms += 1;
+    });
+    document.getElementById('statTotal').textContent = totalGuests;
+    document.getElementById('statRooms').textContent = totalRooms;
+    document.getElementById('statFlying').textContent = totalFlying;
+    document.getElementById('statReception').textContent = totalReception;
+  }
+
+  function esc(s){ var d=document.createElement('div');d.textContent=s;return d.innerHTML; }
+
+  // === FORM ===
+  var formVals = {transport:'yes', hotel:'yes', reception:'yes'};
+
+  document.getElementById('rsvpOpenBtn').addEventListener('click', function(){
+    document.getElementById('rsvpBtnWrap').classList.add('hidden');
+    document.getElementById('formCard').classList.remove('hidden');
+    document.getElementById('fName').focus();
+  });
+
+  document.getElementById('anotherBtn').addEventListener('click', function(){
+    document.getElementById('successBox').classList.add('hidden');
+    document.getElementById('rsvpBtnWrap').classList.remove('hidden');
+  });
+
+  // Toggles
+  function setupToggle(id, key){
+    var wrap = document.getElementById(id);
+    var btns = wrap.querySelectorAll('button');
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){
+        btns.forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        formVals[key] = b.getAttribute('data-val');
+      });
+    });
+  }
+  setupToggle('transportToggle','transport');
+  setupToggle('hotelToggle','hotel');
+  setupToggle('receptionToggle','reception');
+
+  // Enable/disable submit
+  document.getElementById('fName').addEventListener('input', function(){
+    document.getElementById('submitBtn').disabled = !this.value.trim();
+  });
+
+  // Submit
+  document.getElementById('submitBtn').addEventListener('click', function(){
+    var name = document.getElementById('fName').value.trim();
+    if(!name) return;
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+
+    var entry = {
+      name: name,
+      partySize: parseInt(document.getElementById('fSize').value)||1,
+      needsTransport: formVals.transport,
+      needsHotel: formVals.hotel,
+      attendingReception: formVals.reception,
+      phone: document.getElementById('fPhone').value.trim(),
+      notes: document.getElementById('fNotes').value.trim(),
+      timestamp: new Date().toISOString()
+    };
+
+    saveRsvp(entry, function(){
+      // Reset form
+      document.getElementById('fName').value = '';
+      document.getElementById('fSize').value = '1';
+      document.getElementById('fPhone').value = '';
+      document.getElementById('fNotes').value = '';
+      btn.disabled = true;
+      btn.textContent = 'Submit RSVP';
+      formVals = {transport:'yes', hotel:'yes', reception:'yes'};
+      document.querySelectorAll('#transportToggle button, #hotelToggle button, #receptionToggle button').forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-val')==='yes');
+      });
+
+      // Show success
+      document.getElementById('formCard').classList.add('hidden');
+      document.getElementById('successBox').classList.remove('hidden');
+
+      renderNewRsvps();
+      updateStats();
+    });
+  });
+
+  // === ADMIN ===
+  document.getElementById('adminBtn').addEventListener('click', tryAdmin);
+  document.getElementById('adminPass').addEventListener('keydown', function(e){ if(e.key==='Enter') tryAdmin(); });
+  function tryAdmin(){
+    if(document.getElementById('adminPass').value === 'chronos'){
+      document.getElementById('adminLock').classList.add('hidden');
+      document.getElementById('adminPanel').classList.remove('hidden');
+    }
+  }
+
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    var csv = 'Name,Airline Travelers,Hotel Room,Restaurant,Status\n';
+    GUESTS.forEach(function(g){
+      csv += '"'+g.name+'",'+g.airline+','+g.hotel+','+g.restaurant+','+g.status+'\n';
+    });
+    csv += '\n--- New RSVPs ---\n';
+    csv += 'Name,Party Size,Needs Transport,Needs Hotel,Phone,Notes,Timestamp\n';
+    newRsvps.forEach(function(r){
+      csv += '"'+r.name+'",'+r.partySize+','+r.needsTransport+','+r.needsHotel+',"'+(r.phone||'')+'","'+(r.notes||'')+'",'+r.timestamp+'\n';
+    });
+    var blob = new Blob([csv],{type:'text/csv'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.

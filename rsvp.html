@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <title>Stephen &amp; Feba RSVP</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-height:100vh;overflow:hidden}
@@ -15,13 +15,11 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
 .pb .ps{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:rgba(245,240,232,0.5);margin-bottom:24px}
 .pb input{background:rgba(245,240,232,0.06);border:1px solid rgba(201,169,110,0.25);border-radius:10px;padding:14px 20px;font-size:16px;color:#F5F0E8;text-align:center;width:240px;outline:none;font-family:'DM Sans',sans-serif;letter-spacing:3px}
 .pb input:focus{border-color:#C9A96E}
-.pb button{margin-top:16px;padding:12px 36px;border-radius:10px;border:1px solid #C9A96E;background:rgba(201,169,110,0.08);color:#C9A96E;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+.pb button{margin-top:16px;padding:12px 36px;border-radius:10px;border:1px solid #C9A96E;background:rgba(201,169,110,0.08);color:#C9A96E;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
 .pb button:hover{background:#C9A96E;color:#0A0E1A}
 .pe{font-size:12px;color:#C4727F;margin-top:10px;min-height:18px}
 .hd{background:#384C5F;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .w{max-width:760px;margin:0 auto;padding:40px 24px 60px}
-.ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px}
-.ic{padding:20px;border-radius:14px;text-align:center}
 .dv{height:1px;background:linear-gradient(90deg,#C9A96E,rgba(201,169,110,0.05));margin:36px 0}
 .st{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:36px;text-align:center}
 .sn{font-family:'Playfair Display',serif;font-size:36px;font-weight:900}
@@ -29,13 +27,13 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
 .sl::before{content:'';width:40px;height:1px;background:#C9A96E}
 .sl.b{color:#4DA8DA}.sl.b::before{background:#4DA8DA}
 .tb{border-radius:14px;border:1px solid rgba(245,240,232,0.06);overflow:hidden;margin-bottom:16px}
-.th{display:grid;grid-template-columns:1fr 50px 50px 50px 50px 60px;padding:12px 16px;background:rgba(201,169,110,0.06);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#C9A96E;gap:6px}
-.tr{display:grid;grid-template-columns:1fr 50px 50px 50px 50px 60px;padding:10px 16px;border-top:1px solid rgba(245,240,232,0.04);font-size:13px;color:#E8E0D0;gap:6px;align-items:center}
+.th{display:grid;grid-template-columns:1fr 50px 50px 50px 50px 80px;padding:12px 16px;background:rgba(201,169,110,0.06);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#C9A96E;gap:6px}
+.tr{display:grid;grid-template-columns:1fr 50px 50px 50px 50px 80px;padding:10px 16px;border-top:1px solid rgba(245,240,232,0.04);font-size:13px;color:#E8E0D0;gap:6px;align-items:center}
 .ts{display:inline-block;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
 .tl{background:rgba(100,200,130,0.12);color:#68c888}
 .tp{background:rgba(232,131,74,0.12);color:#E8834A}
 .tn{background:rgba(77,168,218,0.12);color:#4DA8DA}
-.rb{display:block;margin:0 auto 40px;padding:16px 48px;border-radius:12px;border:1px solid #C9A96E;background:rgba(201,169,110,0.08);color:#C9A96E;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+.rb{display:block;margin:0 auto 40px;padding:16px 48px;border-radius:12px;border:1px solid #C9A96E;background:rgba(201,169,110,0.08);color:#C9A96E;font-size:15px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
 .rb:hover{background:#C9A96E;color:#0A0E1A}
 .sb{text-align:center;padding:40px;border-radius:16px;border:1px solid rgba(100,200,130,0.2);background:rgba(100,200,130,0.04);margin-bottom:40px}
 .fc{padding:32px;border-radius:16px;border:1px solid rgba(201,169,110,0.15);background:rgba(201,169,110,0.03);margin-bottom:40px}
@@ -50,45 +48,50 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
 .ft button.on{border-color:#C9A96E;background:rgba(201,169,110,0.1);color:#C9A96E}
 .sub{padding:14px 32px;border-radius:12px;border:none;background:#C9A96E;color:#0A0E1A;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:8px;width:100%}
 .sub:disabled{background:rgba(201,169,110,0.2);color:rgba(245,240,232,0.3);cursor:not-allowed}
-.eb{padding:12px 32px;border-radius:10px;border:1px solid rgba(77,168,218,0.3);background:rgba(77,168,218,0.08);color:#4DA8DA;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.eb{padding:12px 32px;border-radius:10px;border:1px solid rgba(77,168,218,0.3);background:rgba(77,168,218,0.08);color:#4DA8DA;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin:4px}
+.up{padding:4px 10px;border-radius:6px;border:1px solid rgba(100,200,130,0.3);background:rgba(100,200,130,0.08);color:#68c888;font-size:10px;font-weight:600;cursor:pointer;letter-spacing:0.5px}
+.up:hover{background:#68c888;color:#0A0E1A}
+.dl{padding:4px 10px;border-radius:6px;border:1px solid rgba(196,114,127,0.3);background:rgba(196,114,127,0.08);color:#C4727F;font-size:10px;font-weight:600;cursor:pointer;letter-spacing:0.5px}
+.dl:hover{background:#C4727F;color:#0A0E1A}
 .ft2{background:#384C5F;padding:14px 32px;text-align:center}
 .dn{display:none!important}
-@media(max-width:640px){.hd{flex-direction:column;text-align:center;padding:16px 20px}.w{padding:32px 16px 50px}.th,.tr{grid-template-columns:1fr 32px 32px 32px 36px 48px;font-size:10px;padding:8px 8px}.st{gap:20px}.ig{grid-template-columns:1fr}}
+@media(max-width:640px){.hd{flex-direction:column;text-align:center;padding:16px 20px}.w{padding:32px 16px 50px}.th,.tr{grid-template-columns:1fr 32px 32px 32px 36px 60px;font-size:10px;padding:8px 8px}.st{gap:20px}}
 </style>
 </head>
 <body>
 <div id="pw"><div class="pb"><h2>Stephen &amp; Feba</h2><div class="ps">Proposal Ceremony RSVP</div><input type="password" id="pf" placeholder="Enter password" maxlength="20" autocomplete="off"><div class="pe" id="pe"></div><button type="button" id="pb2">Unlock</button></div></div>
 <div id="mc">
-<header class="hd"><div><div style="font-size:18px;font-weight:700;color:#fff;letter-spacing:1.5px;">CHRONOS MEDIA LIVE LLC</div><div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px;">Livestreaming | Photos | Audio | Web Design</div></div><div style="text-align:right;font-size:11px;color:rgba(255,255,255,0.8);line-height:1.7;">chronosmedia.to<br>media@chronosmedia.to<br>267-535-0921</div></header>
+<header class="hd"><div><div style="font-size:18px;font-weight:700;color:#fff;letter-spacing:1.5px;">CHRONOS MEDIA LIVE LLC</div><div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px;">Livestreaming | Photos | Audio | Web Design</div></div><div style="text-align:right;font-size:11px;color:rgba(255,255,255,0.8);line-height:1.7;">chronosmedia.to<br>267-535-0921</div></header>
 <div class="w">
-<div style="text-align:center;margin-bottom:48px;"><div style="font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A96E;margin-bottom:16px;">You're Invited</div><h1 style="font-family:'Playfair Display',serif;font-size:clamp(34px,7vw,56px);font-weight:900;line-height:1.1;margin-bottom:8px;">Stephen <span style="color:#C9A96E;">&amp;</span> Feba</h1><p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:rgba(245,240,232,0.65);margin-bottom:16px;">Proposal Ceremony</p><div style="display:inline-block;padding:10px 24px;border-radius:30px;border:1px solid rgba(201,169,110,0.3);background:rgba(201,169,110,0.06);font-size:13px;font-weight:600;letter-spacing:2px;color:#C9A96E;">March 6, 2026 · Point Dume, CA</div></div>
-<div class="ig"><div class="ic" style="border:1px solid rgba(77,168,218,0.15);background:rgba(77,168,218,0.04);"><div style="font-size:28px;margin-bottom:6px;">⛪</div><div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4DA8DA;margin-bottom:4px;">Ceremony</div><div style="font-size:14px;color:#E8E0D0;">4:00 – 5:30 PM</div><div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px;">Palisades Gazebo, Dana Point</div></div><div class="ic" style="border:1px solid rgba(232,131,74,0.12);background:rgba(232,131,74,0.04);"><div style="font-size:28px;margin-bottom:6px;">🍽️</div><div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#E8834A;margin-bottom:4px;">Reception</div><div style="font-size:14px;color:#E8E0D0;">7:00 PM</div><div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px;">Fogo De Chão</div></div><div class="ic" style="border:1px solid rgba(201,169,110,0.12);background:rgba(201,169,110,0.04);"><div style="font-size:28px;margin-bottom:6px;">🏨</div><div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A96E;margin-bottom:4px;">Hotel</div><div style="font-size:14px;color:#E8E0D0;">Embassy Suites</div><div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px;">All guests staying here</div></div></div>
+<div style="text-align:center;margin-bottom:48px;"><div style="font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A96E;margin-bottom:16px;">You're Invited</div><h1 style="font-family:'Playfair Display',serif;font-size:clamp(34px,7vw,56px);font-weight:900;line-height:1.1;margin-bottom:8px;">Stephen <span style="color:#C9A96E;">&amp;</span> Feba</h1><p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:rgba(245,240,232,0.65);margin-bottom:16px;">Proposal Ceremony</p><div style="display:inline-block;padding:10px 24px;border-radius:30px;border:1px solid rgba(201,169,110,0.3);background:rgba(201,169,110,0.06);font-size:13px;font-weight:600;letter-spacing:2px;color:#C9A96E;">March 6, 2026 · Laguna Beach, CA</div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px;"><div style="padding:20px;border-radius:14px;text-align:center;border:1px solid rgba(77,168,218,0.15);background:rgba(77,168,218,0.04);"><div style="font-size:28px;margin-bottom:6px;">&#9962;</div><div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4DA8DA;margin-bottom:4px;">Ceremony</div><div style="font-size:14px;color:#E8E0D0;">5:00 – 6:00 PM</div><div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px;">Laguna Beach area</div></div><div style="padding:20px;border-radius:14px;text-align:center;border:1px solid rgba(232,131,74,0.12);background:rgba(232,131,74,0.04);"><div style="font-size:28px;margin-bottom:6px;">&#127861;</div><div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#E8834A;margin-bottom:4px;">Reception</div><div style="font-size:14px;color:#E8E0D0;">7:00 PM</div><div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px;">Fogo De Chao</div></div><div style="padding:20px;border-radius:14px;text-align:center;border:1px solid rgba(201,169,110,0.12);background:rgba(201,169,110,0.04);"><div style="font-size:28px;margin-bottom:6px;">&#127976;</div><div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A96E;margin-bottom:4px;">Hotel</div><div style="font-size:14px;color:#E8E0D0;">Embassy Suites</div><div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px;">All guests staying here</div></div></div>
 <div class="dv"></div>
 <div class="st"><div><div class="sn" style="color:#C9A96E;" id="sT">0</div><div style="font-size:11px;color:rgba(245,240,232,0.5);">Attending</div></div><div><div class="sn" style="color:#4DA8DA;" id="sR">0</div><div style="font-size:11px;color:rgba(245,240,232,0.5);">Hotel Rooms</div></div><div><div class="sn" style="color:#E8834A;" id="sF">0</div><div style="font-size:11px;color:rgba(245,240,232,0.5);">Flying In</div></div><div><div class="sn" style="color:#68c888;" id="sRc">0</div><div style="font-size:11px;color:rgba(245,240,232,0.5);">At Reception</div></div></div>
 <div class="sl">Confirmed Guests</div>
-<div class="tb"><div class="th"><div>Name</div><div style="text-align:center">✈</div><div style="text-align:center">🏨</div><div style="text-align:center">🍽</div><div style="text-align:center">Fogo</div><div style="text-align:center">Status</div></div><div id="gR"></div></div>
+<div class="tb"><div class="th"><div>Name</div><div style="text-align:center">&#9992;</div><div style="text-align:center">&#127976;</div><div style="text-align:center">&#127860;</div><div style="text-align:center">Fogo</div><div style="text-align:center">Status</div></div><div id="gR"></div></div>
 <div id="nS" class="dn"><div class="sl b" style="margin-top:30px;">New RSVPs</div><div class="tb" style="border-color:rgba(77,168,218,0.12);"><div id="nR"></div></div></div>
 <div class="dv"></div>
 <div id="rW" style="text-align:center;"><button class="rb" type="button" id="rO">RSVP Now</button></div>
-<div class="sb dn" id="sB"><div style="font-size:48px;margin-bottom:12px;">✓</div><h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#68c888;margin-bottom:8px;">You're In!</h3><p style="font-size:14px;color:rgba(245,240,232,0.65);">Your RSVP has been recorded. See you at Point Dume!</p><button type="button" id="aB" style="margin-top:16px;padding:10px 24px;border-radius:8px;border:1px solid rgba(245,240,232,0.1);background:transparent;color:rgba(245,240,232,0.5);font-size:12px;cursor:pointer;">Submit Another</button></div>
+<div class="sb dn" id="sB"><div style="font-size:48px;margin-bottom:12px;">&#10003;</div><h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#68c888;margin-bottom:8px;">You're In!</h3><p style="font-size:14px;color:rgba(245,240,232,0.65);">Your RSVP has been recorded. See you at Laguna Beach!</p><button type="button" id="aB" style="margin-top:16px;padding:10px 24px;border-radius:8px;border:1px solid rgba(245,240,232,0.1);background:transparent;color:rgba(245,240,232,0.5);font-size:12px;cursor:pointer;">Submit Another</button></div>
 <div class="fc dn" id="fC"><h3>RSVP</h3><div class="fi">
 <div><label class="fl">Full Name *</label><input class="fx" id="fN" placeholder="Your name"></div>
 <div><label class="fl">How many attending? *</label><select class="fs" id="fSz"><option value="1">1 person</option><option value="2">2 people</option><option value="3">3 people</option><option value="4">4 people</option><option value="5">5 people</option><option value="6">6 people</option><option value="7">7 people</option><option value="8">8 people</option></select></div>
 <div><label class="fl">Transportation arranged?</label><div class="ft" id="tT"><button type="button" data-v="yes" class="on">Yes</button><button type="button" data-v="no">Need transport</button></div></div>
 <div><label class="fl">Staying at Embassy Suites?</label><div class="ft" id="tH"><button type="button" data-v="yes" class="on">Yes</button><button type="button" data-v="no">No</button></div></div>
-<div><label class="fl">Attending Fogo De Chão Reception?</label><div class="ft" id="tR"><button type="button" data-v="yes" class="on">Yes</button><button type="button" data-v="no">No</button></div></div>
+<div><label class="fl">Attending Fogo De Chao Reception?</label><div class="ft" id="tR"><button type="button" data-v="yes" class="on">Yes</button><button type="button" data-v="no">No</button></div></div>
 <div><label class="fl">Phone</label><input class="fx" id="fP" placeholder="(optional)"></div>
 <div><label class="fl">Notes / Dietary</label><textarea class="fx" id="fNo" placeholder="Anything we should know?" rows="3" style="resize:vertical;"></textarea></div>
 <button class="sub" type="button" id="subB" disabled>Submit RSVP</button>
 </div></div>
-<div style="text-align:center;margin-top:40px;"><div id="aL" style="display:flex;justify-content:center;gap:8px;"><input type="password" style="padding:8px 14px;border-radius:8px;border:1px solid rgba(245,240,232,0.08);background:rgba(245,240,232,0.02);color:rgba(245,240,232,0.4);font-size:12px;outline:none;width:150px;" id="aPs" placeholder="Admin"><button type="button" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(245,240,232,0.08);background:transparent;color:rgba(245,240,232,0.3);font-size:11px;cursor:pointer;" id="aGo">→</button></div><div id="aPn" class="dn"><button class="eb" type="button" id="exB">📥 Export CSV</button><p style="font-size:11px;color:rgba(245,240,232,0.35);margin-top:10px;">Download then import to Google Sheets</p></div></div>
-<div style="text-align:center;margin-top:48px;padding:20px;"><p style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(245,240,232,0.4);">Everyone staying at Embassy Suites near Point Dume.</p><div id="dbS" style="margin-top:12px;font-size:10px;color:rgba(245,240,232,0.2);">Connecting...</div></div>
+<div style="text-align:center;margin-top:40px;"><div id="aL" style="display:flex;justify-content:center;gap:8px;"><input type="password" style="padding:8px 14px;border-radius:8px;border:1px solid rgba(245,240,232,0.08);background:rgba(245,240,232,0.02);color:rgba(245,240,232,0.4);font-size:12px;outline:none;width:150px;" id="aPs" placeholder="Admin"><button type="button" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(245,240,232,0.08);background:transparent;color:rgba(245,240,232,0.3);font-size:11px;cursor:pointer;" id="aGo">&#8594;</button></div><div id="aPn" class="dn"><button class="eb" type="button" id="exB">&#128229; Export CSV</button><p style="font-size:11px;color:rgba(245,240,232,0.35);margin-top:10px;">Download then import to Google Sheets</p></div></div>
+<div style="text-align:center;margin-top:48px;padding:20px;"><p style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(245,240,232,0.4);">Everyone staying at Embassy Suites near Laguna Beach.</p><div id="dbS" style="margin-top:12px;font-size:10px;color:rgba(245,240,232,0.2);">Connecting...</div></div>
 </div>
-<footer class="ft2"><p style="font-size:11px;color:rgba(255,255,255,0.6);">© 2026 Chronos Media Live LLC</p></footer>
+<footer class="ft2"><p style="font-size:11px;color:rgba(255,255,255,0.6);">&#169; 2026 Chronos Media Live LLC</p></footer>
 </div>
 <script>
 var SB_URL='https://arsgzitunzhpzawpdvej.supabase.co';
 var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyc2d6aXR1bnpocHphd3BkdmVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MzExOTYsImV4cCI6MjA4NzIwNzE5Nn0.WmFnIzwhB13zbbl2c_SawNGaNOYmxf_hDednCx0erBg';
+var ADMIN=false;
 var G=[
 {n:"Prasad Abraham",a:4,h:1,r:4,f:4,s:"locked"},
 {n:"John Zach",a:2,h:1,r:2,f:2,s:"locked"},
@@ -96,13 +99,18 @@ var G=[
 {n:"Cherian Abraham",a:3,h:1,r:3,f:3,s:"locked"},
 {n:"Abhi Patel",a:0,h:0,r:1,f:1,s:"locked"},
 {n:"Mathew D George",a:0,h:1,r:1,f:1,s:"locked"},
-{n:"Pheba",a:1,h:1,r:1,f:1,s:"locked"},
 {n:"Gigi & Bosi",a:2,h:1,r:2,f:2,s:"locked"},
-{n:"Abhi OKC",a:0,h:0,r:4,f:4,s:"pending"},
-{n:"Issac Hong",a:0,h:0,r:1,f:1,s:"pending"},
-{n:"Zach C",a:0,h:0,r:1,f:1,s:"pending"},
-{n:"Febin Fredi",a:0,h:1,r:1,f:1,s:"pending"},
-{n:"Pastor Bethel",a:0,h:1,r:1,f:1,s:"pending"}
+{n:"Bijo Joseph",a:0,h:0,r:1,f:1,s:"locked"},
+{n:"Issac Hong",a:0,h:0,r:1,f:1,s:"locked"},
+{n:"Zach Chandapillai",a:0,h:0,r:1,f:1,s:"locked"},
+{n:"Febin Fredi",a:1,h:1,r:1,f:1,s:"locked"},
+{n:"Pastor Bethel",a:0,h:1,r:2,f:2,s:"locked"},
+{n:"Nikita Shinde",a:0,h:0,r:1,f:1,s:"locked"},
+{n:"Shinjini Das",a:0,h:0,r:1,f:1,s:"locked"},
+{n:"Ruth Regi",a:0,h:0,r:1,f:1,s:"locked"},
+{n:"Jacob Abraham",a:0,h:1,r:1,f:1,s:"locked"},
+{n:"Pheba Johnson",a:1,h:1,r:1,f:1,s:"locked"},
+{n:"Eby Daniel",a:4,h:0,r:4,f:4,s:"locked"}
 ];
 var NR=[];
 var FV={transport:'yes',hotel:'yes',reception:'yes'};
@@ -122,7 +130,6 @@ function doUnlock(){
     document.getElementById('pf').focus();
   }
 }
-
 document.getElementById('pb2').onclick=doUnlock;
 document.getElementById('pf').onkeydown=function(e){if(e.key==='Enter')doUnlock();};
 
@@ -131,13 +138,25 @@ function sbGet(cb){
     headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
   }).then(function(r){return r.json();}).then(function(d){cb(null,d);}).catch(function(e){cb(e,null);});
 }
-
 function sbAdd(row,cb){
   fetch(SB_URL+'/rest/v1/rsvp_guests',{
-    method:'POST',
-    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation'},
+    method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation'},
     body:JSON.stringify(row)
   }).then(function(r){return r.json();}).then(function(d){cb(null,d);}).catch(function(e){cb(e,null);});
+}
+function sbDel(id,cb){
+  fetch(SB_URL+'/rest/v1/rsvp_guests?id=eq.'+id,{
+    method:'DELETE',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(){cb(null);}).catch(function(e){cb(e);});
+}
+
+function dedup(arr){
+  var seen={};var out=[];
+  for(var i=0;i<arr.length;i++){
+    var key=arr[i].name.toLowerCase().trim();
+    if(!seen[key]){seen[key]=true;out.push(arr[i]);}
+  }
+  return out;
 }
 
 function renderG(){
@@ -145,12 +164,12 @@ function renderG(){
   for(var i=0;i<G.length;i++){
     var g=G[i];
     var c=g.s==='locked'?'tl':'tp';
-    var l=g.s==='locked'?'✓':'Pending';
+    var l=g.s==='locked'?'&#10003;':'Pending';
     h+='<div class="tr"><div style="font-weight:500">'+g.n+'</div>';
-    h+='<div style="text-align:center;color:rgba(245,240,232,0.5)">'+(g.a||'—')+'</div>';
-    h+='<div style="text-align:center;color:rgba(245,240,232,0.5)">'+(g.h||'—')+'</div>';
+    h+='<div style="text-align:center;color:rgba(245,240,232,0.5)">'+(g.a||'&#8212;')+'</div>';
+    h+='<div style="text-align:center;color:rgba(245,240,232,0.5)">'+(g.h||'&#8212;')+'</div>';
     h+='<div style="text-align:center">'+g.r+'</div>';
-    h+='<div style="text-align:center;color:#68c888">'+(g.f||'—')+'</div>';
+    h+='<div style="text-align:center;color:#68c888">'+(g.f||'&#8212;')+'</div>';
     h+='<div style="text-align:center"><span class="ts '+c+'">'+l+'</span></div></div>';
   }
   document.getElementById('gR').innerHTML=h;
@@ -166,20 +185,49 @@ function renderN(){
     var r=NR[i];
     var ps=r.party_size||1;
     h+='<div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;'+(i>0?'border-top:1px solid rgba(245,240,232,0.04)':'')+'">';
-    h+='<div><div style="font-size:14px;font-weight:600">'+esc(r.name)+'</div>';
+    h+='<div style="flex:1;min-width:200px;"><div style="font-size:14px;font-weight:600">'+esc(r.name)+'</div>';
     h+='<div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px">'+ps+' '+(ps==1?'guest':'guests');
-    h+=' · Hotel: '+(r.needs_hotel==='yes'?'Yes':'No');
-    h+=' · Transport: '+(r.needs_transport==='yes'?'Arranged':'Needed');
-    h+=' · Fogo: '+(r.attending_reception==='no'?'No':'Yes')+'</div>';
-    if(r.phone)h+='<div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px">📞 '+esc(r.phone)+'</div>';
+    h+=' &#183; Hotel: '+(r.needs_hotel==='yes'?'Yes':'No');
+    h+=' &#183; Transport: '+(r.needs_transport==='yes'?'Arranged':'Needed');
+    h+=' &#183; Fogo: '+(r.attending_reception==='no'?'No':'Yes')+'</div>';
+    if(r.phone)h+='<div style="font-size:12px;color:rgba(245,240,232,0.5);margin-top:2px">&#128222; '+esc(r.phone)+'</div>';
     if(r.notes)h+='<div style="font-size:11px;color:rgba(245,240,232,0.35);margin-top:2px;font-style:italic">'+esc(r.notes)+'</div>';
-    h+='</div><span class="ts tn">NEW</span></div>';
+    h+='</div><div style="display:flex;gap:6px;align-items:center;">';
+    if(ADMIN){
+      h+='<button class="up" onclick="promoteN('+i+')">&#8593; Confirm</button>';
+      h+='<button class="dl" onclick="removeN('+i+')">&#10005;</button>';
+    }
+    h+='<span class="ts tn">NEW</span></div></div>';
   }
   c.innerHTML=h;
 }
 
+function promoteN(idx){
+  if(idx<0||idx>=NR.length)return;
+  var r=NR[idx];
+  var ps=parseInt(r.party_size)||1;
+  var fly=r.needs_transport==='yes'?0:ps;
+  var htl=r.needs_hotel==='yes'?1:0;
+  var fogo=r.attending_reception==='no'?0:ps;
+  G.push({n:r.name,a:fly,h:htl,r:ps,f:fogo,s:'locked'});
+  if(r.id){sbDel(r.id,function(){});}
+  NR.splice(idx,1);
+  try{localStorage.setItem('rsvp_d',JSON.stringify(NR));}catch(e){}
+  renderG();renderN();updS();
+}
+
+function removeN(idx){
+  if(idx<0||idx>=NR.length)return;
+  if(!confirm('Remove '+NR[idx].name+'?'))return;
+  var r=NR[idx];
+  if(r.id){sbDel(r.id,function(){});}
+  NR.splice(idx,1);
+  try{localStorage.setItem('rsvp_d',JSON.stringify(NR));}catch(e){}
+  renderN();updS();
+}
+
 function updS(){
-  var tg=0,tr=0,tf=0,tc=0;
+  var tg=2,tr=0,tf=0,tc=2;
   for(var i=0;i<G.length;i++){tg+=G[i].r;tr+=G[i].h;tf+=G[i].a;tc+=G[i].f;}
   for(var j=0;j<NR.length;j++){
     var p=parseInt(NR[j].party_size)||1;
@@ -198,7 +246,6 @@ document.getElementById('rO').onclick=function(){
   document.getElementById('fC').className='fc';
   document.getElementById('fN').focus();
 };
-
 document.getElementById('aB').onclick=function(){
   document.getElementById('sB').className='sb dn';
   document.getElementById('rW').className='';
@@ -231,8 +278,7 @@ document.getElementById('subB').onclick=function(){
   var name=document.getElementById('fN').value.trim();
   if(!name)return;
   var btn=document.getElementById('subB');
-  btn.disabled=true;
-  btn.textContent='Saving...';
+  btn.disabled=true;btn.textContent='Saving...';
   var row={
     name:name,
     party_size:parseInt(document.getElementById('fSz').value)||1,
@@ -245,33 +291,28 @@ document.getElementById('subB').onclick=function(){
   };
   NR.push(row);
   try{localStorage.setItem('rsvp_d',JSON.stringify(NR));}catch(e){}
-  sbAdd(row,function(e,d){
-    if(!e)console.log('Saved to Supabase');
-    else console.warn('Supabase error:',e);
-  });
+  sbAdd(row,function(e,d){if(!e)console.log('Saved');else console.warn('Error:',e);});
   document.getElementById('fN').value='';
   document.getElementById('fSz').value='1';
   document.getElementById('fP').value='';
   document.getElementById('fNo').value='';
-  btn.disabled=true;
-  btn.textContent='Submit RSVP';
+  btn.disabled=true;btn.textContent='Submit RSVP';
   FV={transport:'yes',hotel:'yes',reception:'yes'};
   for(var t=0;t<toggleIds.length;t++){
     var btns=document.getElementById(toggleIds[t]).querySelectorAll('button');
-    for(var b=0;b<btns.length;b++){
-      btns[b].className=btns[b].getAttribute('data-v')==='yes'?'on':'';
-    }
+    for(var b=0;b<btns.length;b++){btns[b].className=btns[b].getAttribute('data-v')==='yes'?'on':'';}
   }
   document.getElementById('fC').className='fc dn';
   document.getElementById('sB').className='sb';
-  renderN();
-  updS();
+  renderN();updS();
 };
 
 document.getElementById('aGo').onclick=function(){
   if(document.getElementById('aPs').value==='chronos'){
+    ADMIN=true;
     document.getElementById('aL').className='dn';
     document.getElementById('aPn').className='';
+    renderN();
   }
 };
 document.getElementById('aPs').onkeydown=function(e){
@@ -291,29 +332,26 @@ document.getElementById('exB').onclick=function(){
   var blob=new Blob([csv],{type:'text/csv'});
   var url=URL.createObjectURL(blob);
   var a=document.createElement('a');
-  a.href=url;
-  a.download='rsvp-proposal-ceremony.csv';
-  a.click();
+  a.href=url;a.download='rsvp-proposal-ceremony.csv';a.click();
   URL.revokeObjectURL(url);
 };
 
 function boot(){
   renderG();
   try{var d=localStorage.getItem('rsvp_d');if(d)NR=JSON.parse(d);}catch(e){}
-  renderN();
-  updS();
+  NR=dedup(NR);
+  renderN();updS();
   sbGet(function(e,d){
     var st=document.getElementById('dbS');
     if(!e&&Array.isArray(d)){
       if(d.length>0){
-        NR=d;
+        NR=dedup(d);
         try{localStorage.setItem('rsvp_d',JSON.stringify(NR));}catch(x){}
       }
-      st.innerHTML='<span style="color:#68c888">●</span> Database connected';
-      renderN();
-      updS();
+      st.innerHTML='<span style="color:#68c888">&#9679;</span> Database connected';
+      renderN();updS();
     }else{
-      st.innerHTML='<span style="color:#E8834A">●</span> Offline mode';
+      st.innerHTML='<span style="color:#E8834A">&#9679;</span> Offline mode';
     }
   });
 }

@@ -97,6 +97,13 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
 .pw-box .pw-err{font-size:12px;color:#C4727F;margin-top:10px;min-height:18px}
 .pw-box button{margin-top:16px;padding:12px 36px;border-radius:10px;border:1px solid #C9A96E;background:rgba(201,169,110,0.08);color:#C9A96E;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
 .pw-box button:hover{background:#C9A96E;color:#0A0E1A}
+.tl-sub{margin:8px 0 0 0;padding:0;list-style:none}
+.tl-sub li{font-size:13px;color:rgba(245,240,232,0.6);padding:3px 0 3px 18px;position:relative;line-height:1.5}
+.tl-sub li::before{content:'';position:absolute;left:0;top:11px;width:8px;height:1px;background:rgba(201,169,110,0.4)}
+.tl-sub li strong{color:#E8E0D0;font-weight:600}
+.tl-sub li .tm{color:#C9A96E;font-weight:600;font-size:11px;letter-spacing:0.5px}
+.tl-day{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#C9A96E;padding:20px 0 12px;border-top:1px solid rgba(201,169,110,0.15);margin-top:8px}
+.tl-day:first-child{border-top:none;margin-top:0}
 </style>
 </head>
 <body>
@@ -145,8 +152,8 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
 
   <div class="section-label">Highly Ambitious Projection</div>
   <h1 class="page-title">The <span class="ocean">Proposal Ceremony</span></h1>
-  <p class="page-sub">Point Dume, California</p>
-  <div class="date-badge">March 6, 2026 &middot; 4:00 PM &ndash; Sunset</div>
+  <p class="page-sub">Laguna Beach area, California</p>
+  <div class="date-badge">March 6, 2026 &middot; 5:00 PM – 6:00 PM</div>
 
   <!-- COLOR PALETTE -->
   <div style="text-align:center; margin-bottom:40px;">
@@ -154,7 +161,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
     <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:20px;">
       <div style="text-align:center;">
         <div style="width:60px; height:60px; border-radius:50%; background:#1B3A5C; margin:0 auto 8px; border:2px solid rgba(245,240,232,0.1);"></div>
-        <div style="font-size:12px; font-weight:600; color:#E8E0D0;">Midnight Blue</div>
+        <div style="font-size:12px; font-weight:600; color:#E8E0D0;">Blue</div>
         <div style="font-size:10px; color:rgba(245,240,232,0.65);">Women</div>
       </div>
       <div style="text-align:center;">
@@ -172,13 +179,13 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
       <div class="card-icon">&#129333;</div>
       <div class="card-label" style="color:#B89FD4;">The Groom</div>
       <div class="card-title">Stephen Johnson</div>
-      <div class="card-sub">Black suit, white shirt, black tie</div>
+      <div class="card-sub">Stephen: Purple tie<br>Groomsmen: Lavender bow ties</div>
     </div>
     <div class="card" style="border-color:rgba(156,175,136,0.25); background:rgba(156,175,136,0.04);">
       <div class="card-icon">&#128112;</div>
       <div class="card-label" style="color:#5B8DBE;">The Bride</div>
       <div class="card-title">Feba Fredi</div>
-      <div class="card-sub">White dress</div>
+      <div class="card-sub">White dress<br>Bridesmaids: Coordinating with Feba</div>
     </div>
     <div class="card" style="border-color:rgba(155,125,184,0.15); background:rgba(155,125,184,0.03);">
       <div class="card-icon">&#128084;</div>
@@ -190,83 +197,186 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
       <div class="card-icon">&#128087;</div>
       <div class="card-label" style="color:#5B8DBE;">Feba's Friends &amp; Family</div>
       <div class="card-title">Bridal Party</div>
-      <div class="card-sub">Darker midnight blue to complement the bride</div>
+      <div class="card-sub">Coordinating dresses with the bride</div>
     </div>
   </div>
 
   <div class="divider"></div>
 
   <!-- TIMELINE -->
-  <div class="section-label" style="margin-top:10px;">Timeline of the Day</div>
 
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-time">1:00 PM &middot; Setup Begins</div>
-      <div class="tl-title">Venue Preparation</div>
-      <div class="tl-desc">Ever After Beach Weddings sets up gazebo, chairs, aisle decor and sound at Point Dume. Chronos Media sets up audio and livestream equipment.</div>
+  <!-- BRIDAL PARTY -->
+  <div class="section-label">Bridal Party</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+    <div style="padding:20px;border-radius:14px;border:1px solid rgba(201,169,110,0.15);background:rgba(201,169,110,0.04);">
+      <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A96E;margin-bottom:12px;">&#129333; Groomsmen</div>
+      <div style="font-size:14px;color:#E8E0D0;line-height:2;">
+        <div><strong>Stephen</strong> <span style="font-size:11px;color:#C9A96E;">&middot; Groom &middot; Purple tie</span></div>
+        <div><strong>Joshua Abraham</strong> <span style="font-size:11px;color:#C9A96E;">&middot; Best Man</span></div>
+        <div>Jacob Abraham</div>
+        <div>Philip Vee</div>
+        <div>Abhi Patel</div>
+        <div>Isaac Hong</div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:rgba(245,240,232,0.5);border-top:1px solid rgba(245,240,232,0.06);padding-top:8px;">&#128084; Lavender bow ties</div>
     </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-time">2:30 PM &middot; Escalades Arrive</div>
-      <div class="tl-title">Escalades at Embassy Suites</div>
-      <div class="tl-desc">Two Cadillac Escalades arrive at Embassy Suites &mdash; one for Stephen, one for Feba.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-time">3:00 PM &middot; Getting Ready</div>
-      <div class="tl-title">Vazquez Photography Begins</div>
-      <div class="tl-desc">Kylie Vazquez (@kylievazquezphoto) starts at 3:00 PM. Captures getting ready photos at Embassy Suites, then photographs Stephen and Feba leaving separately in their Escalades.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-time">3:15 PM &middot; Guest Transport</div>
-      <div class="tl-title">Party Bus from Embassy Suites</div>
-      <div class="tl-desc">Party bus picks up wedding guests from Embassy Suites and brings them to Point Dume for the ceremony.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot ocean"></div>
-      <div class="tl-time ocean">4:00 &ndash; 5:30 PM &middot; Ceremony</div>
-      <div class="tl-title">Proposal Ceremony</div>
-      <div class="tl-desc">Oceanfront ceremony at Point Dume with up to 70 guests. Officiated by Pastor Mathew D George. Chronos Media handles audio, livestreaming, and additional photography coverage. VJ Drones hired for drone shots of the ceremony and entrance.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot ocean"></div>
-      <div class="tl-time ocean">5:30 &ndash; 6:30 PM &middot; Photos</div>
-      <div class="tl-title">Family Photos</div>
-      <div class="tl-desc">Vazquez Photography and Chronos Media capture family photos, couple portraits, and bridal party shots. VJ Drones provides aerial coverage.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot sunset"></div>
-      <div class="tl-time sunset">6:30 PM &middot; The Exit</div>
-      <div class="tl-title">Blue BMW M4 &middot; Ride Into the Sunset</div>
-      <div class="tl-desc">Stephen and Feba hop into a blue BMW M4 and drive off into the sunset. The ultimate send-off.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot rose"></div>
-      <div class="tl-time rose">7:00 PM &middot; Reception</div>
-      <div class="tl-title">Fogo De Ch&atilde;o</div>
-      <div class="tl-desc">Feba changes into a blue Indian attire for the reception. Dinner for ~70 guests. MC'd by Vinu Joseph. Chronos Media handles audio, livestreaming, photography, and photo booth.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-time">March 7&ndash;8 &middot; Weekend</div>
-      <div class="tl-title">Time with Family &amp; Friends</div>
-      <div class="tl-desc">Stephen &amp; Feba spend the weekend together with family and friends in LA.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-time">Sunday &middot; March 8</div>
-      <div class="tl-title">IPC Hebron LA</div>
-      <div class="tl-desc">Stephen &amp; Feba attend IPC Hebron LA together on Sunday. Stephen leaves Sunday evening after church.</div>
+    <div style="padding:20px;border-radius:14px;border:1px solid rgba(77,168,218,0.15);background:rgba(77,168,218,0.04);">
+      <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#4DA8DA;margin-bottom:12px;">&#128112; Feba's Side</div>
+      <div style="font-size:14px;color:#E8E0D0;line-height:2;">
+        <div><strong>Feba</strong> <span style="font-size:11px;color:#4DA8DA;">&middot; Bride</span></div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,0.3);margin:4px 0;">BRIDESMAIDS</div>
+        <div>Ruth Regi</div>
+        <div>Pheba <span style="font-size:11px;color:#4DA8DA;">&middot; Stephen's sister</span></div>
+        <div>Gabby</div>
+        <div>Nikita Shinde <span style="font-size:11px;color:#4DA8DA;">&middot; Roommate</span></div>
+        <div>Shinjini Das <span style="font-size:11px;color:#4DA8DA;">&middot; Roommate</span></div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:rgba(245,240,232,0.5);border-top:1px solid rgba(245,240,232,0.06);padding-top:8px;">&#128087; Bridesmaids coordinating dresses with Feba</div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- SUNSET -->
+  <div class="section-label" style="margin-top:10px;">Timeline of the Day</div>
+
+  <div class="timeline">
+    <div class="tl-day">Wednesday &middot; March 4, 2026</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">WEDNESDAY MAR 4 &middot; Vinu Joseph Arrives</div>
+      <div class="tl-title">San Diego &middot; Hampton Inn</div>
+      <div class="tl-desc">Vinu arrives one day early. Picks up Chrysler Pacifica rental at the airport. Stays one night at Hampton Inn in San Diego before joining everyone Thursday.</div>
+    </div>
+
+    <div class="tl-day">Thursday &middot; March 5, 2026</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">11:45 AM &middot; Large Group Arrives</div>
+      <div class="tl-title">AA2722 &middot; San Diego Airport (SAN)</div>
+      <div class="tl-desc">Prasad, John Zach, Cherian, Gigi &amp; Bosi + families arrive from Philadelphia.</div>
+      <ul class="tl-sub">
+        <li><span class="tm">11:45 AM</span> &mdash; AA2722 lands at SAN Terminal 2</li>
+        <li><span class="tm">12:00 PM</span> &mdash; Pick up both Ford Expeditions at airport</li>
+        <li><span class="tm">1:30 PM</span> &mdash; Drive to Embassy Suites, check in</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">6:35 &ndash; 9:24 PM &middot; Evening Arrivals</div>
+      <div class="tl-title">Stephen &amp; Feba Pickup &middot; Outlander</div>
+      <div class="tl-desc">Stephen &amp; Feba pick up Pastors, Febin Fredi, and parents from San Diego Airport.</div>
+      <ul class="tl-sub">
+        <li><span class="tm">6:35 PM</span> &mdash; <strong>Febin Fredi</strong> arrives (Southwest WN3996, MDW &rarr; SAN)</li>
+        <li><span class="tm">9:24 PM</span> &mdash; <strong>Mathew George</strong> arrives (United UA1626, EWR &rarr; SAN)</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot sunset"></div>
+      <div class="tl-time sunset">THURSDAY EVENING &middot; Large Group Night Out</div>
+      <div class="tl-title">One Night in L.A.</div>
+      <div class="tl-desc">After checking in at Embassy Suites, the large group heads to LA.</div>
+      <ul class="tl-sub">
+        <li><strong>El Compadre</strong> &mdash; Mexican Restaurant, Hollywood (dinner)</li>
+        <li><strong>Griffith Observatory</strong> &mdash; LA skyline views</li>
+        <li><strong>Hollywood Blvd</strong> &mdash; Walk of Fame, nightlife</li>
+      </ul>
+    </div>
+
+        <div class="tl-day">Friday &middot; March 6, 2026 &mdash; Ceremony Day</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">3:00 PM &middot; Vazquez Photography</div>
+      <div class="tl-title">Getting Ready &amp; Hotel Departure</div>
+      <div class="tl-desc">Vazquez Photography booked 3:00 &ndash; 7:00 PM.</div>
+      <ul class="tl-sub">
+        <li><span class="tm">3:00 &ndash; 3:30</span> &mdash; Getting ready photos at hotel</li>
+        <li><span class="tm">3:30 &ndash; 4:00</span> &mdash; Leaving the hotel, departure shots</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot ocean"></div>
+      <div class="tl-time ocean">4:00 PM &middot; Beach Access Opens</div>
+      <div class="tl-title">Setup + Photo Time</div>
+      <div class="tl-desc">Decor and ceremony arrangement. Chronos Media sets up audio and livestream (lapel mics only). Zach Chandapillai handling audio.</div>
+      <ul class="tl-sub">
+        <li><span class="tm">4:00 &ndash; 5:00</span> &mdash; Vazquez &mdash; family photos, couple portraits, golden hour shots</li>
+        <li><span class="tm">4:00 &ndash; 5:00</span> &mdash; Chronos Media &mdash; audio setup, livestream prep</li>
+        <li><span class="tm">4:00 &ndash; 5:00</span> &mdash; VJ Drones &mdash; aerial setup</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot ocean"></div>
+      <div class="tl-time ocean">5:00 PM &middot; Worship</div>
+      <div class="tl-title">Worship Led by Bijo (OKC)</div>
+      <div class="tl-desc">Worship led by Bijo (OKC), co-led with IPC Hebron LA worship team (led by Ruth Regi). Ruth Regi (worship leader, guitar). Need piano &amp; cajon. Sunset at 5:52 PM &mdash; golden hour lighting.</div>
+      <ul class="tl-sub">
+        <li><span class="tm">5:00 &ndash; 5:20</span> &mdash; Worship led by <strong>Bijo</strong>, co-led with IPC Hebron LA (<strong>Ruth Regi</strong>, worship leader) &middot; Guitar: Ruth &middot; <span style="color:#E8834A;">Piano &amp; Cajon TBD</span></li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot ocean"></div>
+      <div class="tl-time ocean">5:20 PM &middot; Proposal Ceremony</div>
+      <div class="tl-title">Pastor Mathew D. George &middot; Officiating</div>
+      <div class="tl-desc">Oceanfront ceremony &mdash; 50 guest max. VJ Drones aerial coverage. Sunset at 5:52 PM.</div>
+      <ul class="tl-sub">
+        <li><span class="tm">5:20 &ndash; 5:23</span> &mdash; <strong>Welcome Family &amp; Guests</strong> &mdash; Pastor Mathew D. George (3 min)</li>
+        <li><span class="tm">5:23 &ndash; 5:28</span> &mdash; <strong>Purpose of Gathering</strong> &mdash; Pastor Mathew D. George (5 min)</li>
+        <li><span class="tm">5:28 &ndash; 5:31</span> &mdash; <strong>Representative for Stephen Johnson</strong> (3 min)</li>
+        <li><span class="tm">5:31 &ndash; 5:34</span> &mdash; <strong>Representative for Feba Fredy</strong> (3 min)</li>
+        <li><span class="tm">5:34 &ndash; 5:40</span> &mdash; <strong>Prayer for the Couple</strong></li>
+        <li><span class="tm">5:40 &ndash; 5:48</span> &mdash; <strong>Closing Song</strong> &mdash; Worship Team led by Bijo</li>
+        <li><span class="tm">5:48 &ndash; 5:55</span> &mdash; <strong>Prayer &amp; Benediction</strong> &mdash; Pastor Bethel Johnson</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot sunset"></div>
+      <div class="tl-time sunset">5:55 PM &middot; Final Instructions</div>
+      <div class="tl-title">Dinner Directions &middot; Vinu Joseph</div>
+      <div class="tl-desc">Fogo De Ch&atilde;o directions. Thank you &amp; wrap-up before 6:00 PM beach access ends.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot sunset"></div>
+      <div class="tl-time sunset">6:00 PM &middot; Post-Ceremony</div>
+      <div class="tl-title">Photos + BMW M4 Sunset Exit</div>
+      <div class="tl-desc">Beach access ends. Vazquez captures final photos.</div>
+      <ul class="tl-sub">
+        <li><span class="tm">6:00 &ndash; 7:00</span> &mdash; Vazquez &mdash; post-ceremony photos</li>
+        <li><span class="tm">6:00+</span> &mdash; Stephen leaves in blue BMW M4</li>
+        <li>Everyone heads to Fogo De Ch&atilde;o &mdash; <strong>be there by 7:00 PM</strong></li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot rose"></div>
+      <div class="tl-time rose">7:00 PM &middot; Reception Dinner</div>
+      <div class="tl-title">Fogo De Ch&atilde;o &middot; 623 Spectrum Center Dr, Irvine</div>
+      <div class="tl-desc">Feba changes into blue Indian attire. ~34 guests. All speeches at restaurant. Vazquez wraps.</div>
+      <ul class="tl-sub">
+        <li><strong>MC:</strong> Vinu Joseph</li>
+        <li><strong>Vote of Thanks:</strong> Cherian Abraham</li>
+        <li><strong>Speakers:</strong> Josh, Jacob, Johnson Zachariah, Stephen</li>
+        <li>Chronos Media &mdash; audio, livestream, photography, photo booth</li>
+      </ul>
+    </div>
+
+<div class="tl-day">Saturday &ndash; Sunday &middot; March 7&ndash;8</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Weekend</div>
+      <div class="tl-title">Time with Family &amp; Friends</div>
+      <div class="tl-desc">Stephen &amp; Feba spend the weekend with family and friends in LA.</div>
+      <ul class="tl-sub">
+        <li><span class="tm">Sat 9:41 PM</span> &mdash; Most guests depart SAN (AA1548 &rarr; PHL)</li>
+        <li><span class="tm">Sat 10:40 PM</span> &mdash; Febin departs SAN (WN2202 &rarr; MDW)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUNSET --><!-- SUNSET -->
   <div class="sunset-block">
-    <div class="sunset-time">6:30 PM &middot; The Grand Exit</div>
+    <div class="sunset-time">6:00 PM &middot; The Grand Exit</div>
     <div class="sunset-title">Blue BMW M4 &#127749;</div>
     <div class="sunset-desc">Stephen &amp; Feba ride into the California sunset together.</div>
   </div>
@@ -276,20 +386,30 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
   <!-- TRANSPORTATION -->
   <div class="section-label">Transportation</div>
   <div class="cars-row">
-    <div class="car-card" style="border:1px solid rgba(245,240,232,0.15); background:rgba(245,240,232,0.04);">
-      <div class="car-emoji">&#128656;</div>
-      <div class="car-label">Escalade #1</div>
-      <div class="car-detail">Brings Stephen</div>
+    <div class="car-card" style="border:1px solid rgba(201,169,110,0.15); background:rgba(201,169,110,0.04);">
+      <div class="car-emoji">&#128663;</div>
+      <div class="car-label">Mitsubishi Outlander</div>
+      <div class="car-detail">Stephen's &middot; Anyone can use &middot; Until Mar 8</div>
     </div>
-    <div class="car-card" style="border:1px solid rgba(245,240,232,0.15); background:rgba(245,240,232,0.04);">
+    <div class="car-card" style="border:1px solid rgba(232,131,74,0.15); background:rgba(232,131,74,0.04);">
       <div class="car-emoji">&#128656;</div>
-      <div class="car-label">Escalade #2</div>
-      <div class="car-detail">Brings Feba</div>
+      <div class="car-label">Ford Expedition #1</div>
+      <div class="car-detail">Under Dad &middot; Driven by Kochumon</div>
+    </div>
+    <div class="car-card" style="border:1px solid rgba(100,200,130,0.15); background:rgba(100,200,130,0.04);">
+      <div class="car-emoji">&#128656;</div>
+      <div class="car-label">Ford Expedition #2</div>
+      <div class="car-detail">Prasad Abraham's rental</div>
+    </div>
+    <div class="car-card" style="border:1px solid rgba(77,168,218,0.15); background:rgba(77,168,218,0.04);">
+      <div class="car-emoji">&#128656;</div>
+      <div class="car-label">Chrysler Pacifica</div>
+      <div class="car-detail">Booked under Vinu Joseph &middot; 7 seats</div>
     </div>
     <div class="car-card blue">
       <div class="car-emoji">&#128309; &#127950;</div>
       <div class="car-label">BMW M4</div>
-      <div class="car-detail">Sunset Exit &middot; 6:30 PM</div>
+      <div class="car-detail">Sunset Exit &middot; 6:00 PM</div>
     </div>
   </div>
 
@@ -299,16 +419,28 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
   <div class="section-label">Vendor Team</div>
   <div class="vendor-grid">
     <div class="vendor">
-      <div class="vendor-icon">&#128146;</div>
-      <div class="vendor-role">Proposal Ceremony Package</div>
-      <div class="vendor-name">Ever After Beach Weddings</div>
-      <div class="vendor-detail">Kristina Danzara<br>Setup &amp; coordination</div>
+      <div class="vendor-icon">&#127925;</div>
+      <div class="vendor-role">Worship Leader</div>
+      <div class="vendor-name">Bijo (OKC)</div>
+      <div class="vendor-detail">Leading worship<br>IPC Hebron LA worship team (led by Ruth Regi) + Ruth</div>
     </div>
     <div class="vendor">
       <div class="vendor-icon">&#9963;</div>
       <div class="vendor-role">Officiant</div>
       <div class="vendor-name">Pastor Mathew D George</div>
       <div class="vendor-detail">Lead Pastor<br>Pentecostal Church of Philadelphia</div>
+    </div>
+    <div class="vendor">
+      <div class="vendor-icon">&#128591;</div>
+      <div class="vendor-role">Benediction</div>
+      <div class="vendor-name">Pastor Bethel Johnson</div>
+      <div class="vendor-detail">Prayer &amp; Benediction<br>Closing of ceremony</div>
+    </div>
+    <div class="vendor">
+      <div class="vendor-icon">&#127908;</div>
+      <div class="vendor-role">Audio / Livestream</div>
+      <div class="vendor-name">Zach Chandapillai</div>
+      <div class="vendor-detail">Chronos Media<br>Lapel mics, audio integration, livestream</div>
     </div>
     <div class="vendor">
       <div class="vendor-icon">&#128248;</div>
@@ -338,80 +470,64 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
       <div class="vendor-icon">&#127976;</div>
       <div class="vendor-role">Hotel</div>
       <div class="vendor-name">Embassy Suites</div>
-      <div class="vendor-detail">Point Dume area<br>20 rooms needed<br><span style="color:#E8834A; font-weight:600;">PENDING</span></div>
+      <div class="vendor-detail">Laguna Beach area<br>8 rooms booked (Mar 5–7)<br><span style="color:#E8834A; font-weight:600;">PENDING</span></div>
     </div>
     <div class="vendor">
       <div class="vendor-icon">&#127860;</div>
       <div class="vendor-role">Dinner Venue</div>
-      <div class="vendor-name">Fogo De Ch&atilde;o</div>
-      <div class="vendor-detail">Seats 70 guests<br>Reception dinner</div>
+      <div class="vendor-name">Fogo De Chão · 623 Spectrum Center Dr, Irvine</div>
+      <div class="vendor-detail">Seats 50 guests<br>Reception dinner</div>
     </div>
   </div>
 
   <div class="divider"></div>
 
   <!-- CHECKLIST -->
-  <div class="section-label">Open Items</div>
+  <div class="section-label">Status</div>
   <div class="checklist">
     <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Obtain Dana Point city permit for Palisades Gazebo <span class="tag tag-needed">Action Needed</span></div>
+      <div class="check-box" style="background:#68c888;border-color:#68c888;">&#10003;</div>
+      <div class="check-text">Fogo De Ch&atilde;o reserved &mdash; 7:00 PM, 623 Spectrum Center Dr, Irvine <span class="tag tag-booked">Confirmed</span></div>
+    </div>
+    <div class="check-item">
+      <div class="check-box" style="background:#68c888;border-color:#68c888;">&#10003;</div>
+      <div class="check-text">Vinu Joseph confirmed as MC for dinner reception <span class="tag tag-booked">Confirmed</span></div>
+    </div>
+    <div class="check-item">
+      <div class="check-box" style="background:#68c888;border-color:#68c888;">&#10003;</div>
+      <div class="check-text">Embassy Suites &mdash; 8 rooms booked (Mar 5&ndash;7) <span class="tag tag-booked">Confirmed</span></div>
+    </div>
+    <div class="check-item">
+      <div class="check-box" style="background:#68c888;border-color:#68c888;">&#10003;</div>
+      <div class="check-text">Homewood Suites Aliso Viejo &mdash; Stephen's hotel (10 nights, Conf: 93806753) <span class="tag tag-booked">Confirmed</span></div>
+    </div>
+    <div class="check-item">
+      <div class="check-box" style="background:#68c888;border-color:#68c888;">&#10003;</div>
+      <div class="check-text">Group AA flights booked (PHL &harr; SAN, Mar 5&ndash;7) <span class="tag tag-booked">Confirmed</span></div>
+    </div>
+    <div class="check-item">
+      <div class="check-box" style="background:#68c888;border-color:#68c888;">&#10003;</div>
+      <div class="check-text">Vehicles &mdash; Outlander, 2 Expeditions, Pacifica, BMW M4 <span class="tag tag-booked">Confirmed</span></div>
+    </div>
+    <div class="check-item">
+      <div class="check-box" style="background:#68c888;border-color:#68c888;">&#10003;</div>
+      <div class="check-text">Beach permit &mdash; live filming permission obtained, lapel mics approved <span class="tag tag-booked">Confirmed</span></div>
+    </div>
+    <div class="check-item">
+      <div class="check-box" style="background:#68c888;border-color:#68c888;">&#10003;</div>
+      <div class="check-text">Worship team &mdash; Bijo (OKC), IPC Hebron LA team, Ruth, Zach (audio) <span class="tag tag-booked">Confirmed</span></div>
     </div>
     <div class="check-item">
       <div class="check-box"></div>
-      <div class="check-text">Pay $83 liability insurance to the city prior to wedding date <span class="tag tag-needed">Action Needed</span></div>
+      <div class="check-text">Finalize ceremony program list with Vinu Joseph <span class="tag tag-needed">In Progress</span></div>
     </div>
     <div class="check-item">
       <div class="check-box"></div>
-      <div class="check-text">Check wedding date availability with city at (949) 248-3521 <span class="tag tag-needed">Action Needed</span></div>
+      <div class="check-text">Confirm reception speakers list (Cherian, Josh, Jacob + others) <span class="tag tag-needed">In Progress</span></div>
     </div>
     <div class="check-item">
       <div class="check-box"></div>
-      <div class="check-text">Book Ever After Beach Weddings proposal ceremony package <span class="tag tag-needed">Action Needed</span></div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Book 20 rooms at Embassy Suites near Point Dume <span class="tag tag-needed">Action Needed</span></div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Book Fogo De Ch&atilde;o for dinner reception for 70 guests <span class="tag tag-needed">Action Needed</span></div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Rent two Cadillac Escalades for Stephen &amp; Feba arrival</div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Rent blue BMW M4 for sunset exit at 6:30 PM</div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Book party bus to transport guests from Embassy Suites to ceremony &amp; dinner venue <span class="tag tag-needed">Action Needed</span></div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Coordinate flights for out-of-state guests</div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Confirm Vinu Joseph as MC for dinner reception <span class="tag tag-booked">Confirmed</span></div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Chronos Media &mdash; plan audio, livestream, photography, and photo booth setup</div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Hire VJ Drones for ceremony and entrance drone coverage <span class="tag tag-needed">Action Needed</span></div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Confirm Vazquez Photography from 3:00 PM for getting ready &amp; ceremony <span class="tag tag-needed">Action Needed</span></div>
-    </div>
-    <div class="check-item">
-      <div class="check-box"></div>
-      <div class="check-text">Confirm with Stephen &amp; Feba together on Wed/Thu Feb 18 call</div>
+      <div class="check-text">Coordinate family representative speakers for ceremony <span class="tag tag-needed">Action Needed</span></div>
     </div>
   </div>
 
@@ -424,4 +540,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0E1A;color:#F5F0E8;min-heigh
 
 </div>
 
-<foote
+<footer style="background:#384C5F;padding:14px 32px;text-align:center;"><p style="font-size:11px;color:rgba(255,255,255,0.6);">&copy; 2026 Chronos Media Live LLC &middot; Capturing the Agape Moments</p></footer>
+</div>
+</body>
+</html>

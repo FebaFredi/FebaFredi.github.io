@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSVP Responses &mdash; Stephen &amp; Feba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+  :root{
+    --ink:#20265C;
+    --paper:#F6F2FC;
+    --paper-2:#EAE1F7;
+    --wine:#4B3A96;
+    --gold:#C9A961;
+    --blue:#1B1F45;
+    --line: rgba(32,38,92,0.16);
+    --good:#3d6b4a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 140% 90% at 50% 0%, rgba(134,112,201,0.08), transparent 55%),
+      linear-gradient(180deg, #FAF7FD 0%, #F5F0FB 40%, #EFE8F9 100%);
+    color:var(--ink);
+    font-family:'Newsreader', serif;
+    min-height:100vh;
+  }
+  .wrap{max-width:1100px; margin:0 auto; padding:40px 24px 80px;}
+
+  header{text-align:center; margin-bottom:36px;}
+  .monogram{width:56px; height:56px; margin:0 auto 12px; display:block;}
+  h1{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:450;
+    font-size:clamp(28px,5vw,38px); margin:0 0 4px; color:var(--wine);
+  }
+  .subhead{
+    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:0.14em;
+    text-transform:uppercase; color:#6a6255;
+  }
+
+  .stats{
+    display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
+    margin:30px 0 34px;
+  }
+  .stat{
+    border:1px solid var(--gold);
+    background:var(--paper-2);
+    padding:16px 24px;
+    text-align:center;
+    min-width:120px;
+    box-shadow:0 10px 22px -14px rgba(32,38,92,0.3);
+  }
+  .stat-num{font-family:'Fraunces',serif; font-size:30px; color:var(--wine); line-height:1;}
+  .stat-label{font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#6a6255; margin-top:6px;}
+
+  .toolbar{
+    display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    margin-bottom:16px;
+  }
+  .toolbar input[type="search"]{
+    font-family:'Newsreader', serif; font-size:15px;
+    padding:10px 14px;
+    border:1px solid var(--ink);
+    background:var(--paper);
+    color:var(--ink);
+    min-width:220px;
+  }
+  .toolbar-actions{display:flex; gap:10px; flex-wrap:wrap;}
+  button.btn{
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    padding:10px 18px;
+    background:var(--wine); color:var(--paper);
+    border:1px solid var(--wine);
+    cursor:pointer;
+    transition:background .2s, color .2s;
+  }
+  button.btn:hover{background:var(--paper); color:var(--wine);}
+  button.btn.secondary{background:var(--paper); color:var(--wine);}
+  button.btn.secondary:hover{background:var(--wine); color:var(--paper);}
+
+  .table-wrap{
+    border:1px solid var(--gold);
+    background:var(--paper-2);
+    overflow-x:auto;
+    box-shadow:0 20px 40px -22px rgba(32,38,92,0.35);
+  }
+  table{border-collapse:collapse; width:100%; min-width:920px;}
+  th, td{
+    text-align:left; padding:12px 14px; font-size:14px;
+    border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  th{
+    font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--wine); background:rgba(201,169,97,0.1);
+    position:sticky; top:0;
+    cursor:pointer;
+    user-select:none;
+  }
+  th:hover{color:var(--ink);}
+  th .arrow{opacity:0.5; margin-left:4px;}
+  tbody tr:hover{background:rgba(201,169,97,0.08);}
+  td.name{font-family:'Fraunces',serif; font-size:15px;}
+  .status-pill{
+    display:inline-block; padding:3px 10px;
+    font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.06em; text-transform:uppercase;
+    border:1px solid var(--line);
+  }
+  .status-pill.yes{color:var(--good); border-color:var(--good);}
+  .status-pill.no{color:var(--wine); border-color:var(--wine);}
+  td.wrap-cell{white-space:normal; max-width:220px;}
+
+  .state-msg{
+    text-align:center; padding:60px 20px; font-style:italic; color:#6a6255;
+  }
+  .state-msg.error{color:var(--wine);}
+
+  footer{
+    text-align:center; margin-top:40px;
+    font-family:'Space Mono',monospace; font-size:11px; color:#8a7f6e;
+  }
+
+  @media (max-width:700px){
+    .toolbar{flex-direction:column; align-items:stretch;}
+    .toolbar input[type="search"]{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <svg class="monogram" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="40" cy="40" r="30" stroke="var(--gold)" stroke-width="1"/>
+      <circle cx="40" cy="40" r="34" stroke="var(--gold)" stroke-width="0.6" opacity="0.5"/>
+      <text x="40" y="49" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="24" fill="var(--ink)">S&amp;F</text>
+    </svg>
+    <h1>RSVP Responses</h1>
+    <div class="subhead">Private &mdash; not linked from the public site</div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="toolbar">
+    <input type="search" id="searchInput" placeholder="Search by name, email, or phone&hellip;">
+    <div class="toolbar-actions">
+      <button class="btn secondary" id="refreshBtn">Refresh</button>
+      <button class="btn" id="exportBtn">Export CSV</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table id="rsvpTable">
+      <thead>
+        <tr>
+          <th data-key="name">Name<span class="arrow"></span></th>
+          <th data-key="phone">Phone<span class="arrow"></span></th>
+          <th data-key="email">Email<span class="arrow"></span></th>
+          <th data-key="attending">Status<span class="arrow"></span></th>
+          <th data-key="adults">Adults<span class="arrow"></span></th>
+          <th data-key="kids">Kids<span class="arrow"></span></th>
+          <th data-key="guest_names">Additional Names<span class="arrow"></span></th>
+          <th data-key="side">Side<span class="arrow"></span></th>
+          <th data-key="hotel_needed">Hotel<span class="arrow"></span></th>
+          <th data-key="submitted_at">Submitted<span class="arrow"></span></th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="10" class="state-msg">Loading responses&hellip;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>Auto-refreshes every 30 seconds</footer>
+</div>
+
+<script>
+(function(){
+  // ---- Fill in your Supabase project details ----
+  var SUPABASE_URL = 'https://fdcswbuhflwncxusfmra.supabase.co';
+  var SUPABASE_ANON_KEY = 'sb_publishable_ZE1OzAv_zst4ekTfhCZK2g_JHrN5Cw4';
+
+  var supabaseClient = null;
+  if (window.supabase) {
+    try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); }
+    catch(e){ console.error('Supabase init failed', e); }
+  }
+
+  var tableBody = document.getElementById('tableBody');
+  var statsEl = document.getElementById('stats');
+  var searchInput = document.getElementById('searchInput');
+  var refreshBtn = document.getElementById('refreshBtn');
+  var exportBtn = document.getElementById('exportBtn');
+  var theadRow = document.querySelector('#rsvpTable thead tr');
+
+  var allRows = [];
+  var sortKey = 'submitted_at';
+  var sortDir = -1; // newest first
+
+  function escapeHtml(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function formatDate(iso){
+    if (!iso) return '';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    return d.toLocaleString(undefined, { month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' });
+  }
+
+  function renderStats(rows){
+    var attending = rows.filter(function(r){ return r.attending === 'yes'; });
+    var declined = rows.filter(function(r){ return r.attending === 'no'; });
+    var totalGuests = attending.reduce(function(sum, r){
+      return sum + (parseInt(r.adults, 10) || 0) + (parseInt(r.kids, 10) || 0);
+    }, 0);
+    var hotelYes = attending.filter(function(r){ return r.hotel_needed === 'yes'; }).length;
+
+    var stats = [
+      { num: rows.length, label: 'Total Responses' },
+      { num: attending.length, label: 'Attending' },
+      { num: declined.length, label: "Can't Make It" },
+      { num: totalGuests, label: 'Total Guests' },
+      { num: hotelYes, label: 'Need Hotel' }
+    ];
+    statsEl.innerHTML = stats.map(function(s){
+      return '<div class="stat"><div class="stat-num">' + s.num + '</div><div class="stat-label">' + s.label + '</div></div>';
+    }).join('');
+  }
+
+  function renderTable(rows){
+    if (rows.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="10" class="state-msg">No responses match.</td></tr>';
+      return;
+    }
+    tableBody.innerHTML = rows.map(function(r){
+      var statusLabel = r.attending === 'yes' ? 'Attending' : (r.attending === 'no' ? "Can't make it" : '&mdash;');
+      var statusClass = r.attending === 'yes' ? 'yes' : 'no';
+      return '<tr>' +
+        '<td class="name">' + escapeHtml(r.name) + '</td>' +
+        '<td>' + escapeHtml(r.phone) + '</td>' +
+        '<td>' + escapeHtml(r.email) + '</td>' +
+        '<td><span class="status-pill ' + statusClass + '">' + statusLabel + '</span></td>' +
+        '<td>' + (r.adults != null ? escapeHtml(r.adults) : '') + '</td>' +
+        '<td>' + (r.kids != null ? escapeHtml(r.kids) : '') + '</td>' +
+        '<td class="wrap-cell">' + escapeHtml(r.guest_names) + '</td>' +
+        '<td>' + escapeHtml(r.side) + '</td>' +
+        '<td>' + escapeHtml(r.hotel_needed) + '</td>' +
+        '<td>' + escapeHtml(formatDate(r.submitted_at)) + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function applySortAndFilter(){
+    var query = searchInput.value.trim().toLowerCase();
+    var rows = allRows.slice();
+
+    if (query) {
+      rows = rows.filter(function(r){
+        return (r.name || '').toLowerCase().indexOf(query) !== -1 ||
+               (r.email || '').toLowerCase().indexOf(query) !== -1 ||
+               (r.phone || '').toLowerCase().indexOf(query) !== -1;
+      });
+    }
+
+    rows.sort(function(a, b){
+      var av = a[sortKey], bv = b[sortKey];
+      if (av == null) av = '';
+      if (bv == null) bv = '';
+      if (sortKey === 'submitted_at') {
+        return (new Date(av) - new Date(bv)) * sortDir;
+      }
+      if (typeof av === 'number' || typeof bv === 'number') {
+        return ((av || 0) - (bv || 0)) * sortDir;
+      }
+      return String(av).localeCompare(String(bv)) * sortDir;
+    });
+
+    renderStats(allRows);
+    renderTable(rows);
+  }
+
+  async function loadData(){
+    if (!supabaseClient) {
+      tableBody.innerHTML = '<tr><td colspan="10" class="state-msg error">Supabase isn\\'t configured on this page.</td></tr>';
+      return;
+    }
+    try {
+      var res = await supabaseClient.from('rsvps').select('*').order('submitted_at', { ascending: false });
+      if (res.error) throw res.error;
+      allRows = res.data || [];
+      applySortAndFilter();
+    } catch(err){
+      console.error('Load failed', err);
+      tableBody.innerHTML = '<tr><td colspan="10" class="state-msg error">Couldn\\'t load responses. Check the console for details.</td></tr>';
+    }
+  }
+
+  theadRow.querySelectorAll('th').forEach(function(th){
+    th.addEventListener('click', function(){
+      var key = th.getAttribute('data-key');
+      if (sortKey === key) {
+        sortDir *= -1;
+      } else {
+        sortKey = key;
+        sortDir = 1;
+      }
+      theadRow.querySelectorAll('.arrow').forEach(function(a){ a.textContent = ''; });
+      th.querySelector('.arrow').textContent = sortDir === 1 ? '\\u2191' : '\\u2193';
+      applySortAndFilter();
+    });
+  });
+
+  searchInput.addEventListener('input', applySortAndFilter);
+  refreshBtn.addEventListener('click', loadData);
+
+  exportBtn.addEventListener('click', function(){
+    var headers = ['Name','Phone','Email','Attending','Adults','Kids','Additional Names','Side','Hotel','Submitted At'];
+    var lines = [headers.join(',')];
+    allRows.forEach(function(r){
+      var row = [r.name, r.phone, r.email, r.attending, r.adults, r.kids, r.guest_names, r.side, r.hotel_needed, r.submitted_at];
+      lines.push(row.map(function(v){
+        var s = v == null ? '' : String(v);
+        return '"' + s.replace(/"/g, '""') + '"';
+      }).join(','));
+    });
+    var blob = new Blob([lines.join('\\n')], { type: 'text/csv' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'rsvp-responses.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  loadData();
+  setInterval(loadData, 30000);
+})();
+</script>
+
+</body>
+</html>

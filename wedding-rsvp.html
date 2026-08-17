@@ -380,12 +380,10 @@
       return;
     }
     resultsEl.innerHTML = found.slice(0, 8).map(function(g, i){
-      var allotted = g.allowed_count || 0;
-      var subtitle = 'Up to ' + allotted + (allotted === 1 ? ' guest' : ' guests');
-      var answeredTag = g.responded ? '<span class="rc-sub">Response received &mdash; tap to view or edit</span>' : '<span class="rc-sub">' + escapeHtml(subtitle) + '</span>';
+      var subtitleText = g.responded ? 'Response received &mdash; tap to view or edit' : 'Tap to RSVP';
       return '<button type="button" class="result-card' + (g.responded ? ' answered' : '') + '" data-idx="' + i + '">' +
         '<div class="rc-title">' + escapeHtml(g.household) + '</div>' +
-        answeredTag +
+        '<span class="rc-sub">' + subtitleText + '</span>' +
       '</button>';
     }).join('');
 

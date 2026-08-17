@@ -572,6 +572,13 @@
     padding-bottom:2px;
   }
   .rsvp-note{max-width:52ch; margin:18px auto 30px; font-style:italic; color:#3a3a34;}
+  .rsvp-alt{
+    max-width:52ch; margin:-14px auto 30px;
+    font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.02em;
+    color:#6a6255;
+  }
+  .rsvp-alt a{color:var(--wine); text-decoration:underline; text-underline-offset:2px;}
+  .rsvp-alt a:hover{color:var(--ink);}
 
   .rsvp-form-full{
     max-width:480px; margin:0 auto; text-align:left;
@@ -1154,6 +1161,7 @@
         <div class="label">Kindly respond by</div>
         <div class="rsvp-date">August 31, 2026</div>
         <p class="rsvp-note">We can't wait to celebrate with you at Westmount Country Club in Woodland Park, NJ on November 7, 2026. Let us know if you can make it below.</p>
+        <p class="rsvp-alt">Part of a family invited under one name? <a href="rsvp-lookup.html" target="_blank" rel="noopener">Find your household's invitation here</a> instead.</p>
 
         <form class="rsvp-form-full" id="rsvpForm" novalidate>
           <div class="rsvp-field">
@@ -1210,6 +1218,10 @@
                 <input type="radio" id="hotelNo" name="hotel" value="no">
                 <label for="hotelNo">No</label>
               </div>
+            </div>
+            <div class="rsvp-field">
+              <label for="rsvpNotes">Allergies or notes</label>
+              <textarea id="rsvpNotes" name="notes" placeholder="Food allergies, dietary restrictions, or anything else we should know"></textarea>
             </div>
           </div>
 
@@ -1408,6 +1420,7 @@
       var side = attending === 'yes' && sideEl ? sideEl.value : null;
       var hotelEl = form.querySelector('input[name="hotel"]:checked');
       var hotel = attending === 'yes' && hotelEl ? hotelEl.value : null;
+      var notes = attending === 'yes' ? form.notes.value.trim() : null;
       var submittedAt = new Date().toISOString();
 
       var submitBtn = form.querySelector('.rsvp-submit');
@@ -1420,7 +1433,7 @@
           var res = await supabaseClient.from('rsvps').insert([{
             name: name, phone: phone, email: email, attending: attending,
             adults: adults, kids: kids, guest_names: guestNames, side: side, hotel_needed: hotel,
-            submitted_at: submittedAt
+            notes: notes, submitted_at: submittedAt
           }]);
           saved = !res.error;
           if (res.error) console.error('Supabase insert error', res.error);
@@ -1429,7 +1442,7 @@
           var entry = {
             name: name, phone: phone, email: email, attending: attending,
             adults: adults, kids: kids, guestNames: guestNames, side: side, hotel: hotel,
-            submittedAt: submittedAt
+            notes: notes, submittedAt: submittedAt
           };
           var result = await window.storage.set(id, JSON.stringify(entry), true);
           saved = !!result;

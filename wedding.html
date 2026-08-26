@@ -1161,7 +1161,6 @@
         <div class="label">Kindly respond by</div>
         <div class="rsvp-date">August 31, 2026</div>
         <p class="rsvp-note">We can't wait to celebrate with you at Westmount Country Club in Woodland Park, NJ on November 7, 2026. Let us know if you can make it below.</p>
-        <p class="rsvp-alt">Part of a family invited under one name? <a href="rsvp-lookup.html" target="_blank" rel="noopener">Find your household's invitation here</a> instead.</p>
 
         <form class="rsvp-form-full" id="rsvpForm" novalidate>
           <div class="rsvp-field">
@@ -1451,6 +1450,7 @@
         console.error('RSVP save failed', err);
       }
 
+      if (saved) { submitBtn.textContent = 'Sent'; }
       form.hidden = true;
       confirmBox.hidden = false;
       var titleEl = confirmBox.querySelector('.confirm-title');

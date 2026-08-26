@@ -166,11 +166,12 @@
           <th data-key="guest_names">Additional Names<span class="arrow"></span></th>
           <th data-key="side">Side<span class="arrow"></span></th>
           <th data-key="hotel_needed">Hotel<span class="arrow"></span></th>
+          <th data-key="notes">Notes<span class="arrow"></span></th>
           <th data-key="submitted_at">Submitted<span class="arrow"></span></th>
         </tr>
       </thead>
       <tbody id="tableBody">
-        <tr><td colspan="10" class="state-msg">Loading responses&hellip;</td></tr>
+        <tr><td colspan="11" class="state-msg">Loading responses&hellip;</td></tr>
       </tbody>
     </table>
   </div>
@@ -236,7 +237,7 @@
 
   function renderTable(rows){
     if (rows.length === 0) {
-      tableBody.innerHTML = '<tr><td colspan="10" class="state-msg">No responses match.</td></tr>';
+      tableBody.innerHTML = '<tr><td colspan="11" class="state-msg">No responses match.</td></tr>';
       return;
     }
     tableBody.innerHTML = rows.map(function(r){
@@ -252,6 +253,7 @@
         '<td class="wrap-cell">' + escapeHtml(r.guest_names) + '</td>' +
         '<td>' + escapeHtml(r.side) + '</td>' +
         '<td>' + escapeHtml(r.hotel_needed) + '</td>' +
+        '<td class="wrap-cell">' + escapeHtml(r.notes) + '</td>' +
         '<td>' + escapeHtml(formatDate(r.submitted_at)) + '</td>' +
       '</tr>';
     }).join('');
@@ -288,7 +290,7 @@
 
   async function loadData(){
     if (!supabaseClient) {
-      tableBody.innerHTML = '<tr><td colspan="10" class="state-msg error">Supabase is not configured on this page.</td></tr>';
+      tableBody.innerHTML = '<tr><td colspan="11" class="state-msg error">Supabase is not configured on this page.</td></tr>';
       return;
     }
     try {
@@ -302,7 +304,7 @@
       var hint = (err && err.code === '42P01')
         ? ' (the "rsvps" table was not found &mdash; check the table name and that it exists in the public schema)'
         : '';
-      tableBody.innerHTML = '<tr><td colspan="10" class="state-msg error">Could not load responses: ' + escapeHtml(msg) + hint + '</td></tr>';
+      tableBody.innerHTML = '<tr><td colspan="11" class="state-msg error">Could not load responses: ' + escapeHtml(msg) + hint + '</td></tr>';
     }
   }
 
@@ -325,10 +327,10 @@
   refreshBtn.addEventListener('click', loadData);
 
   exportBtn.addEventListener('click', function(){
-    var headers = ['Name','Phone','Email','Attending','Adults','Kids','Additional Names','Side','Hotel','Submitted At'];
+    var headers = ['Name','Phone','Email','Attending','Adults','Kids','Additional Names','Side','Hotel','Notes','Submitted At'];
     var lines = [headers.join(',')];
     allRows.forEach(function(r){
-      var row = [r.name, r.phone, r.email, r.attending, r.adults, r.kids, r.guest_names, r.side, r.hotel_needed, r.submitted_at];
+      var row = [r.name, r.phone, r.email, r.attending, r.adults, r.kids, r.guest_names, r.side, r.hotel_needed, r.notes, r.submitted_at];
       lines.push(row.map(function(v){
         var s = v == null ? '' : String(v);
         return '"' + s.replace(/"/g, '""') + '"';

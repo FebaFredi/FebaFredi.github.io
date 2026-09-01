@@ -64,14 +64,19 @@
       radial-gradient(ellipse 90% 70% at 50% 40%, rgba(201,169,97,0.14), transparent 60%),
       linear-gradient(160deg, #2B2F6B 0%, #1B1F45 55%, #0D0E24 100%);
     overflow:hidden;
+    cursor:pointer;
+    animation:introFadeOut 0.9s ease 2.6s forwards;
   }
   #introSplash.intro-hide{
-    animation:introFadeOut 0.9s ease forwards;
+    animation:introFadeOut 0.6s ease forwards;
   }
-  @keyframes introFadeOut{ to{ opacity:0; visibility:hidden; } }
+  @keyframes introFadeOut{ to{ opacity:0; visibility:hidden; pointer-events:none; } }
 
-  .intro-flower{position:relative; z-index:2;}
-  .intro-flower svg{width:min(46vw,220px); height:min(46vw,220px); display:block;}
+  .intro-flower{
+    position:relative; z-index:2;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .intro-flower svg{width:min(46vw,220px); height:min(46vw,220px); display:block; margin:0 auto;}
   .intro-flower .petal{
     transform-box:fill-box; transform-origin:center;
     transform:scale(0.05);
@@ -112,6 +117,7 @@
   }
   @keyframes bloomCore{ to{ transform:scale(1); opacity:1; } }
 
+  .intro-petals{position:absolute; inset:0; pointer-events:none;}
   .falling-petal{
     position:absolute;
     top:-40px;
@@ -1210,15 +1216,6 @@
               </div>
             </div>
             <div class="rsvp-field">
-              <label>Will you need a hotel?</label>
-              <div class="rsvp-toggle">
-                <input type="radio" id="hotelYes" name="hotel" value="yes">
-                <label for="hotelYes">Yes</label>
-                <input type="radio" id="hotelNo" name="hotel" value="no">
-                <label for="hotelNo">No</label>
-              </div>
-            </div>
-            <div class="rsvp-field">
               <label for="rsvpNotes">Allergies or notes</label>
               <textarea id="rsvpNotes" name="notes" placeholder="Food allergies, dietary restrictions, or anything else we should know"></textarea>
             </div>
@@ -1283,15 +1280,24 @@
     var splash = document.getElementById('introSplash');
     if (splash) {
       var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var showFor = prefersReduced ? 200 : 2400;
+      var dismissed = false;
       document.body.style.overflow = 'hidden';
-      setTimeout(function(){
+
+      function dismiss(){
+        if (dismissed) return;
+        dismissed = true;
         splash.classList.add('intro-hide');
         document.body.style.overflow = '';
-        setTimeout(function(){
-          splash.style.display = 'none';
-        }, 950);
-      }, showFor);
+        setTimeout(function(){ splash.style.display = 'none'; }, 700);
+      }
+
+      splash.addEventListener('click', dismiss);
+
+      if (prefersReduced) {
+        dismiss();
+      } else {
+        setTimeout(dismiss, 2600);
+      }
     }
   })();
   </script>
@@ -1417,8 +1423,6 @@
       var guestNames = attending === 'yes' ? form.guestNames.value.trim() : null;
       var sideEl = form.querySelector('input[name="side"]:checked');
       var side = attending === 'yes' && sideEl ? sideEl.value : null;
-      var hotelEl = form.querySelector('input[name="hotel"]:checked');
-      var hotel = attending === 'yes' && hotelEl ? hotelEl.value : null;
       var notes = attending === 'yes' ? form.notes.value.trim() : null;
       var submittedAt = new Date().toISOString();
 
@@ -1431,7 +1435,7 @@
         if (supabaseClient) {
           var res = await supabaseClient.from('rsvps').insert([{
             name: name, phone: phone, email: email, attending: attending,
-            adults: adults, kids: kids, guest_names: guestNames, side: side, hotel_needed: hotel,
+            adults: adults, kids: kids, guest_names: guestNames, side: side,
             notes: notes, submitted_at: submittedAt
           }]);
           saved = !res.error;
@@ -1440,7 +1444,7 @@
           var id = 'rsvp:' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
           var entry = {
             name: name, phone: phone, email: email, attending: attending,
-            adults: adults, kids: kids, guestNames: guestNames, side: side, hotel: hotel,
+            adults: adults, kids: kids, guestNames: guestNames, side: side,
             notes: notes, submittedAt: submittedAt
           };
           var result = await window.storage.set(id, JSON.stringify(entry), true);
@@ -1461,7 +1465,9 @@
       if (saved) {
         titleEl.textContent = 'Thank You!';
         bodyEl.hidden = false;
-        bodyEl.textContent = "Excited to see you there!";
+        bodyEl.textContent = attending === 'yes'
+          ? "Excited to see you there!"
+          : "We'll miss you, but thank you for letting us know.";
         checkEl.hidden = false;
         if (panelEl) panelEl.classList.add('is-confirmed');
       } else {
